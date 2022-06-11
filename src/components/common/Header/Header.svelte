@@ -1,11 +1,13 @@
 <script>
     import  Logo  from './Logo.svelte'
+    import Socials from './Socials'
+    import Nav from './Nav'
 </script>
 <header>
     <nav>
-        <ul></ul>
+        <Socials />
         <Logo />
-        <ul></ul>
+        <Nav />
     </nav>
 </header>
 
@@ -19,7 +21,7 @@
 
         nav {
             margin:0 auto;
-            max-width: 1028px;
+            max-width: 1228px;
             height: var(--header-height);
             display: flex;
             align-items: center;

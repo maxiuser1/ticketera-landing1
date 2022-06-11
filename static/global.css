@@ -2,8 +2,9 @@
     --header-height: 4.75rem;
     --red: #FF0036;
     --pink: #D30ED1;
-    
+
 }
+
 
 
 *,::before,::after{
@@ -12,12 +13,18 @@
     margin: 0;
 }
 
+@font-face {
+    font-family: 'Gotham';
+    src: url('./fonts/Gotham-Book.otf') format("opentype");
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body{
     margin: var(--header-height) 0 0 0;
+    font-family: Gotham !important;
 }
 
 
