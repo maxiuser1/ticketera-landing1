@@ -13,6 +13,7 @@ const config = {
 		vite:{
 			resolve:{
 				alias:{
+					'@components':path.resolve('./src/components'),
 					'@model':path.resolve('./api/model')
 				}
 			}
