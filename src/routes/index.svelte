@@ -7,7 +7,7 @@
     let error = null
     onMount(async () => {
         try {
-            const res = await axios.get(`/api/HttpExample?name=jose`)
+            const res = await axios.get(`http://localhost:7071/api/HttpExample?name=jose`)
             console.log('res', res)
             resu = res.data
         } catch (e) {
