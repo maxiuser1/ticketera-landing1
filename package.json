@@ -2,7 +2,7 @@
 	"name": "landing",
 	"version": "0.0.1",
 	"engines": {
-		"node": ">=16.7"
+		"node": ">=16.0.0"
 	},
 	"scripts": {
 		"dev": "svelte-kit dev",
