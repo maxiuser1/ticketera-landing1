@@ -1,5 +1,6 @@
 import azure from 'svelte-adapter-azure-swa';
 import preprocess from 'svelte-preprocess';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,7 +9,14 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: azure()
+		adapter: azure(),
+		vite:{
+			resolve:{
+				alias:{
+					'@model':path.resolve('./api/model')
+				}
+			}
+		}
 	}
 };
 

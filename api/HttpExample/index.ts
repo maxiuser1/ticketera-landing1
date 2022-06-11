@@ -1,4 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
+import { PersonHandler } from '../services/personHandler';
 
 const httpTrigger: AzureFunction = async function (
 	context: Context,
@@ -6,13 +7,13 @@ const httpTrigger: AzureFunction = async function (
 ): Promise<void> {
 	context.log('HTTP trigger function processed a request.');
 	const name = req.query.name || (req.body && req.body.name);
-	const responseMessage = name
-		? 'Hola, ' + name + '. This HTTP triggered function executed successfully.'
-		: 'This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.';
+
+	const handler = new PersonHandler();
+	const result = handler.Handle(name);
 
 	context.res = {
 		// status: 200, /* Defaults to 200 */
-		body: responseMessage
+		body: result
 	};
 };
 

@@ -1,7 +1,9 @@
 <script lang="ts">
     import axios from "axios"
     import { onMount } from "svelte"
-    let resu =""
+    import type { Person } from "@model/index"
+
+    let resu : Person;
     let error = null
     onMount(async () => {
         try {
@@ -13,5 +15,5 @@
         }
     });
 </script>
-<h1>Bienvenido to SvelteKit {resu}</h1>
+<h1>Bienvenido to SvelteKit {resu?.name} {resu?.id}</h1>
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
