@@ -1,40 +1,38 @@
-:root{
-    --header-height: 4.75rem;
-    --red: #FF0036;
-    --pink: #D30ED1;
-
+:root {
+	--header-height: 4.75rem;
+	--red: #ff0036;
+	--pink: #d30ed1;
 }
 
-
-
-*,::before,::after{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
 
 @font-face {
-    font-family: 'Gotham';
-    src: url('./fonts/Gotham-Book.otf') format("opentype");
+	font-family: 'Gotham';
+	src: url('./fonts/Gotham-Book.otf') format('opentype');
 }
 
 html {
-    scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
-body{
-    margin: var(--header-height) 0 0 0;
-    font-family: Gotham !important;
+body {
+	margin: var(--header-height) 0 0 0;
+	font-family: Gotham !important;
 }
 
-
-ul{
-    list-style: none;
+ul {
+	list-style: none;
 }
-a{
-    text-decoration: none;
+a {
+	text-decoration: none;
 }
-img{
-    max-width: 100%;
-    height: auto;
+img {
+	max-width: 100%;
+	height: auto;
 }

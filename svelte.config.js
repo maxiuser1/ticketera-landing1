@@ -10,11 +10,11 @@ const config = {
 
 	kit: {
 		adapter: azure(),
-		vite:{
-			resolve:{
-				alias:{
-					'@components':path.resolve('./src/components'),
-					'@model':path.resolve('./api/model')
+		vite: {
+			resolve: {
+				alias: {
+					'@components': path.resolve('./src/components'),
+					'@model': path.resolve('./api/model')
 				}
 			}
 		}

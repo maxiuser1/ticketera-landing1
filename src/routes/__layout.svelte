@@ -1,5 +1,8 @@
 <script>
-    import { Header } from "@components/common";
+	import { Header } from '@components/common';
 </script>
-    <Header />
-    <slot />
+
+<Header />
+<main>
+	<slot />
+</main>
