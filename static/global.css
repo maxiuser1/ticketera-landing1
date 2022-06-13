@@ -24,7 +24,7 @@ html {
 body {
 	margin: var(--header-height) 0 0 0;
 	font-family: Gotham !important;
-	background: #F8F8F8;
+	background: #f8f8f8;
 }
 
 ul {

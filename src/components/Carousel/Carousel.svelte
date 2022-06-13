@@ -72,9 +72,9 @@
 		.slide {
 			color: yellow;
 			font-size: 20px;
-			background-size: 100% 100%;                /* <------ */
-			background-repeat:   no-repeat;
-			background-position: center center; 
+			background-size: 100% 100%; /* <------ */
+			background-repeat: no-repeat;
+			background-position: center center;
 			height: 440px;
 		}
 

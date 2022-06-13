@@ -5,7 +5,7 @@
 </script>
 
 <header>
-	<nav>
+	<nav class="container">
 		<Socials />
 		<Logo />
 		<Nav />
@@ -22,7 +22,6 @@
 
 		nav {
 			margin: 0 auto;
-			max-width: 1228px;
 			height: var(--header-height);
 			display: flex;
 			align-items: center;
