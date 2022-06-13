@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let items = ['a', 'b', 'c'];
-	let cantidad = 3;
+	let items = [
+		'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/yankee_m7mqxf.jpg',
+		'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/coldplay_fesjvi.jpg',
+		'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/balvin_vten2p.jpg'
+	];
+	let cantidad = items.length;
 	let ancho = 100 * cantidad;
 	let mini = 100 / cantidad;
 	let translate = 0;
-	let _interval: any;
-		let iteraciones = 0;
+	let selectedidx = 0;
 
 	const handleClick = (idx: number) => {
-		console.log('llego ', idx);
+		selectedidx = idx;
 		translate = idx * (mini * -1);
 	};
 
@@ -21,21 +24,15 @@
 	const start = () => {
 		let current = 0;
 		return new Promise((resolve) => {
-		   _interval = setIntervalImmediate(() => {
+			setIntervalImmediate(() => {
 				handleClick(current);
 				current++;
-				iteraciones++;
 				if (current == items.length) {
 					current = 0;
 				}
-				if(iteraciones > 10){
-					stopInterval();
-				}
-			}, 1000);
+			}, 3000);
 		});
 	};
-
-	const stopInterval = () => clearInterval(_interval);
 
 	const setIntervalImmediate = (fn: Function, ms: number) => {
 		fn();
@@ -45,29 +42,14 @@
 
 <section class="carousel" aria-label="carousel">
 	<div class="grande" style:width="{ancho}%" style:transform="translateX({translate}%)">
-		<div
-			class="slide"
-			style="background-image: url('https://source.unsplash.com/78A265wPiO4');width: {mini}%;"
-		>
-			img1
-		</div>
-		<div
-			class="slide"
-			style="background-image: url('https://source.unsplash.com/eOpewngf68w');width: {mini}%;"
-		>
-			img2
-		</div>
-		<div
-			class="slide"
-			style="background-image: url('https://source.unsplash.com/ndN00KmbJ1c');width: {mini}%;"
-		>
-			img3
-		</div>
+		{#each items as item, idx}
+			<div class="slide" style="background-image: url('{item}');width: {mini}%;" />
+		{/each}
 	</div>
 	<div class="botonera">
 		<ul class="puntos">
 			{#each items as item, idx}
-				<li class="punto" on:click={() => handleClick(idx)} />
+				<li class="punto" on:click={() => handleClick(idx)} class:selected={selectedidx === idx} />
 			{/each}
 		</ul>
 	</div>
@@ -90,9 +72,10 @@
 		.slide {
 			color: yellow;
 			font-size: 20px;
-			background-repeat: no-repeat;
-			background-size: cover;
-			height: 400px;
+			background-size: 100% 100%;                /* <------ */
+			background-repeat:   no-repeat;
+			background-position: center center; 
+			height: 440px;
 		}
 
 		.botonera {
@@ -105,16 +88,25 @@
 
 		.puntos {
 			display: flex;
+			gap: 8px;
 			flex-flow: row nowrap;
 		}
 
 		.punto {
-			width: 1em;
+			width: 12px;
 			cursor: pointer;
-			height: 1em;
-			background-color: blue;
-			margin: 1em;
+			height: 12px;
+			background-color: white;
+			border: 1px solid #a809a6;
+			margin-bottom: 52px;
 			border-radius: 50%;
+		}
+
+		.selected {
+			width: 32px;
+			background: #d30ed1;
+			border: 1px solid #ffffff;
+			border-radius: 8px;
 		}
 	}
 </style>

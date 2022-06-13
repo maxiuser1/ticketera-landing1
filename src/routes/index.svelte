@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import type { Person } from '@model/index';
 	import Carousel from '@components/Carousel';
+	import SearchBox from '@components/Layout/SearchBox';
 
 	let resu: Person;
 	let error = null;
@@ -18,5 +19,6 @@
 </script>
 
 <Carousel />
+<SearchBox />
 
 <div>{resu?.name} x</div>
