@@ -1,8 +1,12 @@
 <script>
+	import { fade, scale } from 'svelte/transition';
 	import Logo from './Logo.svelte';
 	import Socials from './Socials';
 	import Nav from './Nav';
 
+	const animate = (node, args) =>
+		args.cond ? fade(node, args) : scale(node, args);
+		
 	let visible = false;
 
 	const toggle = () => {
@@ -18,7 +22,7 @@
 	</nav>
 </header>
 {#if visible}
-<header class="categories" >
+<header class="categories"  transition:animate>
 	<nav class="container">
 		<ul>
 			<li>Conciertos</li>
@@ -60,7 +64,7 @@
 		top: var(--header-height);
 		left: 0;
 		background-color: #5B025A;
-		transition: all 0.5s ease-out;
+	
 		nav {
 			margin: 0 auto;
 			height: 50px;
