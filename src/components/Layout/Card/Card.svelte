@@ -2,7 +2,7 @@
 	<div class="imagen">
 		<img
 			src="https://res.cloudinary.com/maxitech/image/upload/v1655108590/ticketera/cards/c1_dhyg7w.jpg"
-			width="100%"
+			width="100%" alt="x"
 		/>
 	</div>
 	<div class="content">asd</div>
