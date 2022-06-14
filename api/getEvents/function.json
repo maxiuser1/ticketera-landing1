@@ -1,0 +1,26 @@
+{
+	"bindings": [
+		{
+			"authLevel": "function",
+			"type": "httpTrigger",
+			"direction": "in",
+			"name": "req",
+			"methods": ["get"],
+			"route": "events"
+		},
+		{
+			"type": "http",
+			"direction": "out",
+			"name": "res"
+		},
+		{
+			"type": "cosmosDB",
+			"direction": "in",
+			"name": "items",
+			"databaseName": "quehaydb",
+			"collectionName": "eventos",
+			"connectionStringSetting": "CosmosDBConnection"
+		}
+	],
+	"scriptFile": "../dist/getEvents/index.js"
+}

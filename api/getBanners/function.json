@@ -1,0 +1,27 @@
+{
+	"bindings": [
+		{
+			"authLevel": "function",
+			"type": "httpTrigger",
+			"direction": "in",
+			"name": "req",
+			"methods": ["get"],
+			"route": "banners"
+		},
+		{
+			"type": "http",
+			"direction": "out",
+			"name": "res"
+		},
+		{
+			"type": "cosmosDB",
+			"direction": "in",
+			"name": "items",
+			"databaseName": "quehaydb",
+			"collectionName": "eventos",
+			"connectionStringSetting": "CosmosDBConnection",
+			"sqlQuery": "SELECT c.banner from c where c.banner != null"
+		}
+	],
+	"scriptFile": "../dist/getBanners/index.js"
+}

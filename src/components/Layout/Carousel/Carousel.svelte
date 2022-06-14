@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { Evento } from '@models/index';
+	import axios from 'axios';
 
-	let items = [
-		'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/yankee_m7mqxf.jpg',
-		'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/coldplay_fesjvi.jpg',
-		'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/balvin_vten2p.jpg'
-	];
-	let cantidad = items.length;
-	let ancho = 100 * cantidad;
-	let mini = 100 / cantidad;
+	let items: Array<Evento> = [];
+
+	let cantidad = 0;
+	let ancho = 0;
+	let mini = 0;
 	let translate = 0;
 	let selectedidx = 0;
 
@@ -17,7 +16,18 @@
 		translate = idx * (mini * -1);
 	};
 
+	onMount(async () => {
+		const rest = await axios.get('/api/banners');
+		items = rest.data;
+		cantidad = items.length;
+		ancho = 100 * cantidad;
+		mini = 100 / cantidad;
+		translate = 0;
+		selectedidx = 0;
+	});
+
 	onMount(() => {
+		console.log('items', items);
 		start();
 	});
 
@@ -42,8 +52,8 @@
 
 <section class="carousel" aria-label="carousel">
 	<div class="grande" style:width="{ancho}%" style:transform="translateX({translate}%)">
-		{#each items as item, idx}
-			<div class="slide" style="background-image: url('{item}');width: {mini}%;" />
+		{#each items as item}
+			<div class="slide" style="background-image: url('{item.banner}');width: {mini}%;" />
 		{/each}
 	</div>
 	<div class="botonera">

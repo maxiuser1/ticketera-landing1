@@ -4,38 +4,37 @@
 	import Socials from './Socials';
 	import Nav from './Nav';
 
-	const animate = (node, args) =>
-		args.cond ? fade(node, args) : scale(node, args);
-		
+	const animate = (node, args) => (args.cond ? fade(node, args) : scale(node, args));
+
 	let visible = false;
 
 	const toggle = () => {
 		visible = !visible;
-	}
+	};
 </script>
 
 <header class="main">
 	<nav class="container">
 		<Socials />
 		<Logo />
-		<Nav on:togglemenu={toggle} closable={visible}/>
+		<Nav on:togglemenu={toggle} closable={visible} />
 	</nav>
 </header>
 {#if visible}
-<header class="categories"  transition:animate>
-	<nav class="container">
-		<ul>
-			<li>Conciertos</li>
-			<li>Teatro</li>
-			<li>Deportes</li>
-			<li>Festivales</li>
-			<li>Arte y Cultura</li>
-			<li>Cursos y talleres</li>
-			<li>Niños</li>
-			<li>Viajes y aventuras</li>
-		</ul>
-	</nav>
-</header>
+	<header class="categories" transition:animate>
+		<nav class="container">
+			<ul>
+				<li>Conciertos</li>
+				<li>Teatro</li>
+				<li>Deportes</li>
+				<li>Festivales</li>
+				<li>Arte y Cultura</li>
+				<li>Cursos y talleres</li>
+				<li>Niños</li>
+				<li>Viajes y aventuras</li>
+			</ul>
+		</nav>
+	</header>
 {/if}
 
 <style lang="scss">
@@ -56,15 +55,14 @@
 		}
 	}
 
-	.categories{
-
+	.categories {
 		width: 100%;
 		position: fixed;
 		z-index: 2;
 		top: var(--header-height);
 		left: 0;
-		background-color: #5B025A;
-	
+		background-color: #5b025a;
+
 		nav {
 			margin: 0 auto;
 			height: 50px;
@@ -72,16 +70,16 @@
 			align-items: center;
 			justify-content: space-between;
 
-			ul{
-				display:flex;
-				gap:32px;
-				li{
-					color:white;
+			ul {
+				display: flex;
+				gap: 32px;
+				li {
+					color: white;
 					font-weight: 500;
-font-size: 14px;
-line-height: 18px;
+					font-size: 14px;
+					line-height: 18px;
 				}
 			}
 		}
-	}	
+	}
 </style>
