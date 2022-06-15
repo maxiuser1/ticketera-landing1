@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { Evento } from '@models/index';
 	import axios from 'axios';
+	import { apii } from '@components/common';
 
 	let items: Array<Evento> = [];
 
@@ -17,7 +18,7 @@
 	};
 
 	onMount(async () => {
-		const rest = await axios.get('/api/banners');
+		const rest = await axios.get(apii + '/api/banners');
 		items = rest.data;
 		cantidad = items.length;
 		ancho = 100 * cantidad;
