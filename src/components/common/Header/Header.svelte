@@ -1,16 +1,26 @@
-<script>
-	import { fade, scale } from 'svelte/transition';
+<script lang="ts">
+	import { slide } from 'svelte/transition';
 	import Logo from './Logo.svelte';
 	import Socials from './Socials';
 	import Nav from './Nav';
+	import { onMount } from 'svelte';
+	import axios from 'axios';
+	import { apii } from '@components/common';
 
-	const animate = (node, args) => (args.cond ? fade(node, args) : scale(node, args));
+	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
 
 	let visible = false;
+	let categories: string[] = [];
 
 	const toggle = () => {
 		visible = !visible;
 	};
+
+	onMount(async () => {
+		const rest = await axios.get(apii + '/api/parametros/categorias');
+		console.log('categories', rest.data);
+		if (rest.data) categories = rest.data[0].values;
+	});
 </script>
 
 <header class="main">
@@ -24,14 +34,9 @@
 	<header class="categories" transition:animate>
 		<nav class="container">
 			<ul>
-				<li>Conciertos</li>
-				<li>Teatro</li>
-				<li>Deportes</li>
-				<li>Festivales</li>
-				<li>Arte y Cultura</li>
-				<li>Cursos y talleres</li>
-				<li>Niños</li>
-				<li>Viajes y aventuras</li>
+				{#each categories as category}
+					<li>{category}</li>
+				{/each}
 			</ul>
 		</nav>
 	</header>

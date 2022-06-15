@@ -1,0 +1,27 @@
+{
+	"bindings": [
+		{
+			"authLevel": "function",
+			"type": "httpTrigger",
+			"direction": "in",
+			"name": "req",
+			"methods": ["get"],
+			"route": "parametros/{tipo}"
+		},
+		{
+			"type": "http",
+			"direction": "out",
+			"name": "res"
+		},
+		{
+			"type": "cosmosDB",
+			"name": "documents",
+			"direction": "in",
+			"connectionStringSetting": "CosmosDBConnection",
+			"databaseName": "quehaydb",
+			"collectionName": "parametros",
+			"sqlQuery": "SELECT c.values from c where c.tipo = {tipo}"
+		}
+	],
+	"scriptFile": "../dist/getParametros/index.js"
+}
