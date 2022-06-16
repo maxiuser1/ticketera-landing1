@@ -10,16 +10,16 @@
 	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
 
 	let visible = false;
-	let categories: string[] = [];
+	let categories: string[] = ['test'];
 
 	const toggle = () => {
 		visible = !visible;
 	};
 
 	onMount(async () => {
-		const rest = await axios.get(apii + '/api/parametros/categorias');
-		console.log('categories', rest.data);
-		if (rest.data) categories = rest.data[0].values;
+		// const rest = await axios.get(apii + '/api/parametros/categorias');
+		// console.log('categories', rest.data);
+		// if (rest.data) categories = rest.data[0].values;
 	});
 </script>
 
