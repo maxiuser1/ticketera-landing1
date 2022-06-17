@@ -14,6 +14,7 @@ const config = {
 			resolve: {
 				alias: {
 					'@components': path.resolve('./src/components'),
+					'@lib': path.resolve('./src/lib'),
 					'@models': path.resolve('./api/models')
 				}
 			}

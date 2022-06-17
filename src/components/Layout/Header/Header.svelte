@@ -5,21 +5,21 @@
 	import Nav from './Nav';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
-	import { apii } from '@components/common';
+	import { apii } from '@components/Layout';
 
 	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
 
 	let visible = false;
-	let categories: string[] = ['test'];
+	let categories: string[] = [];
 
 	const toggle = () => {
 		visible = !visible;
 	};
 
 	onMount(async () => {
-		// const rest = await axios.get(apii + '/api/parametros/categorias');
-		// console.log('categories', rest.data);
-		// if (rest.data) categories = rest.data[0].values;
+		const rest = await axios.get(apii + '/api/parametros/categorias');
+		console.log('categories', rest.data);
+		if (rest.data) categories = rest.data[0].values;
 	});
 </script>
 

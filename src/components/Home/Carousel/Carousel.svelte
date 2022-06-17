@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { Evento } from '@models/index';
 	import axios from 'axios';
-	import { apii } from '@components/common';
+	import { apii } from '@components/Layout';
 
 	let items: Array<Evento> = [];
 

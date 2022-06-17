@@ -1,4 +1,5 @@
-export { default as SearchBox } from './SearchBox';
-export { default as Sections } from './Sections';
-export { default as Cards } from './Cards';
-export { default as Carousel } from './Carousel';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+
+export const apii = 'http://localhost:7071';
+// export const apii = '';

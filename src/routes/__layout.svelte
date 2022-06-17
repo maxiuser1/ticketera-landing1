@@ -1,11 +1,12 @@
 <script>
-	import { Header } from '@components/common';
+	import { Header, Footer } from '@components/Layout';
 </script>
 
 <Header />
 <main>
 	<slot />
 </main>
+<Footer />
 
 <style>
 	:global(.container) {

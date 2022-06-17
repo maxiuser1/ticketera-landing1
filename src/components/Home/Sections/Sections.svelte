@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Cards from '@components/Layout/Cards';
+	import Cards from '@components/Home/Cards';
 </script>
 
 <section>
