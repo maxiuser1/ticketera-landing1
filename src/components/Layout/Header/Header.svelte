@@ -18,8 +18,7 @@
 
 	onMount(async () => {
 		const rest = await axios.get(apii + '/api/parametros/categorias');
-		console.log('categories', rest.data);
-		if (rest.data) categories = rest.data[0].values;
+		categories = rest?.data[0].values;
 	});
 </script>
 
