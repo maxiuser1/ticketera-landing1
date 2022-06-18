@@ -61,17 +61,17 @@
 
 	const redirigir = (slug: string) => {
 		goto(`/${slug}`);
-	}
+	};
 </script>
 
 <section class="carousel" aria-label="carousel">
 	<div class="grande" style:width="{ancho}%" style:transform="translateX({translate}%)">
 		{#each items as item}
-			
-				<div class="slide" on:click={() => redirigir(item.slug)} style="background-image: url('{item.banner}');width: {mini}%;">
-					
-				</div>
-			
+			<div
+				class="slide"
+				on:click={() => redirigir(item.slug)}
+				style="background-image: url('{item.banner}');width: {mini}%;"
+			/>
 		{/each}
 	</div>
 	<div class="botonera">
@@ -99,9 +99,9 @@
 
 		.slide {
 			color: yellow;
-			cursor:pointer;
+			cursor: pointer;
 			font-size: 20px;
-			background-size: 100% 100%; 
+			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: center center;
 			height: 440px;
