@@ -1,17 +1,17 @@
 <script lang="ts">
 	import type { Evento } from '@models/index';
-	export let event: Evento;
+	export let evento: Evento;
 </script>
 
-<a href="/{event.slug}">
+<a href="/{evento.slug}">
 	<div class="card">
 		<div class="imagen">
-			<img src={event.banner} width="100%" alt="x" />
+			<img src={evento.banner} width="100%" alt="x" />
 		</div>
 		<div class="content">
 			<div class="info">
 				<h2>
-					{event.artista} <span class="tour">{event.nombre}</span>
+					{evento.artista} <span class="tour">{evento.nombre}</span>
 				</h2>
 				<h3>
 					<svg
@@ -26,7 +26,7 @@
 							fill="#777777"
 						/>
 					</svg>
-					<span> {event.lugar} </span>
+					<span> {evento.lugar} </span>
 				</h3>
 			</div>
 			<div class="fechas">

@@ -12,6 +12,7 @@
 		"paths": {
 			"@components/*": ["src/components/*"],
 			"@lib/*": ["src/lib/*"],
+			"@application/*": ["src/application/*"],
 			"@models/*": ["api/models/*"]
 		}
 	}

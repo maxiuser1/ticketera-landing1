@@ -1,40 +1,42 @@
-<script context="module">
+<script context="module" lang="ts">
+	import type { EventGallery } from '@application/models';
 	import { apii } from '@components/Layout';
-	export async function load({ fetch, stuff }) {
+	export const load = async ({ fetch, stuff }: { fetch: Function; stuff: any }) => {
+		let eventGallery: EventGallery = {};
+
 		const bannersResp = await fetch(apii + '/api/banners');
 		const banners = await bannersResp.json();
 
 		const eventsResp = await fetch(apii + '/api/destacados/events');
-		const destacados = await eventsResp.json();
+		eventGallery.destacados = await eventsResp.json();
 
-		let moreEvents = [];
-		for (var categorie of stuff.categories) {
-			const eventsResp = await fetch(apii + `/api/${categorie}/events`);
-			const events = await eventsResp.json();
-			if (events && events.length > 0) {
-				moreEvents.push({ categorie, events });
+		eventGallery.otros = [];
+		for (var categoria of stuff.categories) {
+			const eventsResp = await fetch(apii + `/api/${categoria}/events`);
+			const eventos = await eventsResp.json();
+			if (eventos?.length > 0) {
+				eventGallery.otros.push({ categoria, eventos });
 			}
 		}
 
 		return {
 			props: {
-				items: banners,
-				eventsSet: {
-					destacados,
-					moreEvents
-				}
+				banners,
+				eventGallery
 			}
 		};
-	}
+	};
 </script>
 
 <script lang="ts">
+	import type { Evento } from '@models/index';
 	import Carousel from '@components/Home/Carousel';
 	import { SearchBox, Sections } from '@components/Home';
-	export let items;
-	export let eventsSet;
+
+	export let banners: Array<Evento>;
+	export let eventGallery: EventGallery;
 </script>
 
-<Carousel {items} />
+<Carousel {banners} />
 <SearchBox />
-<Sections {eventsSet} />
+<Sections {eventGallery} />

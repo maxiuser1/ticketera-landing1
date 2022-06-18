@@ -1,12 +1,13 @@
 <script lang="ts">
+	import type { EventGallery } from '@application/models';
 	import Cards from '@components/Home/Cards';
-	export let eventsSet;
+	export let eventGallery: EventGallery;
 </script>
 
 <section>
 	<div class="container">
 		<a href="/" class="titulo">Destacados</a>
-		<Cards events={eventsSet.destacados} />
+		<Cards eventos={eventGallery.destacados ?? []} />
 		<div class="botonera">
 			<button class="vermas"> Ver más destacados</button>
 		</div>
@@ -16,16 +17,16 @@
 <section>
 	<div class="container">
 		<a href="/" class="titulo">Nuevos</a>
-		<Cards events={eventsSet.destacados} />
+		<Cards eventos={eventGallery.destacados ?? []} />
 	</div>
 </section>
 
 <section class="last" />
-{#each eventsSet.moreEvents as eventSet}
+{#each eventGallery.otros as gallery}
 	<section>
 		<div class="container">
-			<a href="/" class="titulo">{eventSet.categorie}</a>
-			<Cards events={eventSet.events} />
+			<a href="/" class="titulo">{gallery.categoria}</a>
+			<Cards eventos={gallery.eventos} />
 		</div>
 	</section>
 {/each}

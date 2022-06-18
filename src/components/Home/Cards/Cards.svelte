@@ -1,11 +1,12 @@
 <script lang="ts">
+	import type { Evento } from '@models/index';
 	import Card from '../Card';
-	export let events;
+	export let eventos: Array<Evento>;
 </script>
 
 <div class="cards">
-	{#each events as event}
-		<Card {event} />
+	{#each eventos as evento}
+		<Card {evento} />
 	{/each}
 </div>
 

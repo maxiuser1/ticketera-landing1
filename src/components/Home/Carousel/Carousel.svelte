@@ -1,22 +1,19 @@
 <script context="module">
-	export async function load({ params, fetch, stuff }) {
-		console.log('carousel stuff', stuff);
+	export const load = async ({ stuff }) => {
 		return {
 			props: {
 				banners: stuff.banners
 			}
 		};
-	}
+	};
 </script>
 
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import type { Evento } from '@models/index';
-	import axios from 'axios';
-	import { apii } from '@components/Layout';
 
-	export let items: Array<Evento>;
+	export let banners: Array<Evento>;
 
 	let cantidad = 0;
 	let ancho = 0;
@@ -30,7 +27,7 @@
 	};
 
 	onMount(async () => {
-		cantidad = items.length;
+		cantidad = banners.length;
 		ancho = 100 * cantidad;
 		mini = 100 / cantidad;
 		translate = 0;
@@ -47,7 +44,7 @@
 			setIntervalImmediate(() => {
 				handleClick(current);
 				current++;
-				if (current == items.length) {
+				if (current == banners.length) {
 					current = 0;
 				}
 			}, 3000);
@@ -66,7 +63,7 @@
 
 <section class="carousel" aria-label="carousel">
 	<div class="grande" style:width="{ancho}%" style:transform="translateX({translate}%)">
-		{#each items as item}
+		{#each banners as item}
 			<div
 				class="slide"
 				on:click={() => redirigir(item.slug)}
@@ -76,7 +73,7 @@
 	</div>
 	<div class="botonera">
 		<ul class="puntos">
-			{#each items as item, idx}
+			{#each banners as item, idx}
 				<li class="punto" on:click={() => handleClick(idx)} class:selected={selectedidx === idx} />
 			{/each}
 		</ul>
