@@ -7,4 +7,5 @@ export type Evento = {
 	fechas?: string[];
 	lugar?: string;
 	precios?: Price[];
+	slug?: string;
 };

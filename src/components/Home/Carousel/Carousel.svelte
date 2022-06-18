@@ -2,20 +2,21 @@
 	export async function load({ params, fetch, stuff }) {
 		console.log('carousel stuff', stuff);
 		return {
-			props:{
+			props: {
 				banners: stuff.banners
 			}
-		}
+		};
 	}
 </script>
 
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import type { Evento } from '@models/index';
 	import axios from 'axios';
 	import { apii } from '@components/Layout';
 
- 	export	let items: Array<Evento>;
+	export let items: Array<Evento>;
 
 	let cantidad = 0;
 	let ancho = 0;
@@ -57,12 +58,20 @@
 		fn();
 		return setInterval(fn, ms);
 	};
+
+	const redirigir = (slug: string) => {
+		goto(`/${slug}`);
+	}
 </script>
 
 <section class="carousel" aria-label="carousel">
 	<div class="grande" style:width="{ancho}%" style:transform="translateX({translate}%)">
 		{#each items as item}
-			<div class="slide" style="background-image: url('{item.banner}');width: {mini}%;" />
+			
+				<div class="slide" on:click={() => redirigir(item.slug)} style="background-image: url('{item.banner}');width: {mini}%;">
+					
+				</div>
+			
 		{/each}
 	</div>
 	<div class="botonera">
@@ -90,8 +99,9 @@
 
 		.slide {
 			color: yellow;
+			cursor:pointer;
 			font-size: 20px;
-			background-size: 100% 100%; /* <------ */
+			background-size: 100% 100%; 
 			background-repeat: no-repeat;
 			background-position: center center;
 			height: 440px;

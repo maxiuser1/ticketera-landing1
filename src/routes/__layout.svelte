@@ -7,7 +7,7 @@
 			props: {
 				categories: data[0].values
 			},
-			stuff:{
+			stuff: {
 				categories: data[0].values
 			}
 		};
@@ -18,6 +18,7 @@
 	import { Header, Footer } from '@components/Layout';
 	export let categories;
 </script>
+
 <Header {categories} />
 <main>
 	<slot />

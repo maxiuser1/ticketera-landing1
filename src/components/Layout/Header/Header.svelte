@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import axios from 'axios';
 	import { apii } from '@components/Layout';
-	
+
 	export let categories;
 
 	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
@@ -16,8 +16,6 @@
 	const toggle = () => {
 		visible = !visible;
 	};
-
-	
 </script>
 
 <header class="main">

@@ -1,20 +1,18 @@
 {
-  "bindings": [
-    {
-      "authLevel": "function",
-      "type": "httpTrigger",
-      "direction": "in",
-      "name": "req",
-      "methods": [
-        "get"
-      ],
-      "route":"destacados/events"
-    },
-    {
-      "type": "http",
-      "direction": "out",
-      "name": "res"
-    },
+	"bindings": [
+		{
+			"authLevel": "function",
+			"type": "httpTrigger",
+			"direction": "in",
+			"name": "req",
+			"methods": ["get"],
+			"route": "destacados/events"
+		},
+		{
+			"type": "http",
+			"direction": "out",
+			"name": "res"
+		},
 		{
 			"type": "cosmosDB",
 			"direction": "in",
@@ -22,8 +20,8 @@
 			"databaseName": "quehaydb",
 			"collectionName": "eventos",
 			"connectionStringSetting": "CosmosDBConnection",
-      "sqlQuery": "SELECT top 6 c.banner,c.slug,c.fechas,c.nombre,c.artista,c.lugar from c where c.destacado"
+			"sqlQuery": "SELECT top 6 c.banner,c.slug,c.fechas,c.nombre,c.artista,c.lugar from c where c.destacado"
 		}
-  ],
-  "scriptFile": "../dist/getDestacados/index.js"
+	],
+	"scriptFile": "../dist/getDestacados/index.js"
 }

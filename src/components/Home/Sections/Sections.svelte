@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Cards from '@components/Home/Cards';
+	export let destacados;
 </script>
 
 <section>
 	<div class="container">
 		<a href="/" class="titulo">Destacados</a>
-		<Cards />
+		<Cards events={destacados} />
 	</div>
 </section>
 

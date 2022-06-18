@@ -1,14 +1,12 @@
 <script lang="ts">
 	import Card from '../Card';
+	export let events;
 </script>
 
 <div class="cards">
-	<Card />
-	<Card />
-	<Card />
-	<Card />
-	<Card />
-	<Card />
+	{#each events as event}
+		<Card {event} />
+	{/each}
 </div>
 
 <style lang="scss">
