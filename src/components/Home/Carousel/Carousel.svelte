@@ -1,10 +1,21 @@
+<script context="module">
+	export async function load({ params, fetch, stuff }) {
+		console.log('carousel stuff', stuff);
+		return {
+			props:{
+				banners: stuff.banners
+			}
+		}
+	}
+</script>
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Evento } from '@models/index';
 	import axios from 'axios';
 	import { apii } from '@components/Layout';
 
-	let items: Array<Evento> = [];
+ 	export	let items: Array<Evento>;
 
 	let cantidad = 0;
 	let ancho = 0;
@@ -18,8 +29,6 @@
 	};
 
 	onMount(async () => {
-		const rest = await axios.get(apii + '/api/banners');
-		items = rest.data;
 		cantidad = items.length;
 		ancho = 100 * cantidad;
 		mini = 100 / cantidad;
@@ -28,7 +37,6 @@
 	});
 
 	onMount(() => {
-		console.log('items', items);
 		start();
 	});
 

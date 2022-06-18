@@ -20,7 +20,7 @@
 			"databaseName": "quehaydb",
 			"collectionName": "eventos",
 			"connectionStringSetting": "CosmosDBConnection",
-			"sqlQuery": "SELECT c.banner from c where c.banner != null"
+			"sqlQuery": "SELECT c.banner,c.slug from c where c.carousel"
 		}
 	],
 	"scriptFile": "../dist/getBanners/index.js"

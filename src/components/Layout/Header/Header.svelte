@@ -6,20 +6,18 @@
 	import { onMount } from 'svelte';
 	import axios from 'axios';
 	import { apii } from '@components/Layout';
+	
+	export let categories;
 
 	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
 
 	let visible = false;
-	let categories: string[] = [];
 
 	const toggle = () => {
 		visible = !visible;
 	};
 
-	onMount(async () => {
-		const rest = await axios.get(apii + '/api/parametros/categorias');
-		categories = rest?.data[0].values;
-	});
+	
 </script>
 
 <header class="main">

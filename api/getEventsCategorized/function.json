@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"{categoria}/events"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+		{
+			"type": "cosmosDB",
+			"direction": "in",
+			"name": "items",
+			"databaseName": "quehaydb",
+			"collectionName": "eventos",
+			"connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery": "SELECT top 6 c.banner,c.fechas,c.slug,c.nombre,c.artista,c.lugar from c where c.categoria = {categoria}"
+		}
+  ],
+  "scriptFile": "../dist/getEventsCategorized/index.js"
+}
