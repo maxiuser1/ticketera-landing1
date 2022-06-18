@@ -30,7 +30,6 @@
 	</section>
 {/each}
 
-
 <section class="preventas">
 	<div class="container">
 		<a href="/" class="titulo">Preventas</a>
@@ -77,20 +76,19 @@
 </section>
 
 <style lang="scss">
-
-	.botonera{
-		width:100%;
-		text-align:center;
+	.botonera {
+		width: 100%;
+		text-align: center;
 	}
-	.vermas{
-		color:#D30ED1;
-		padding:12px 16px;
+	.vermas {
+		color: #d30ed1;
+		padding: 12px 16px;
 		margin-top: 32px;
-		font-weight: 500;
-font-size: 16px;
-line-height: 24px;
-		background:none;
-		border: 1px solid #D30ED1;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 24px;
+		background: none;
+		border: 1px solid #d30ed1;
 		border-radius: 4px;
 	}
 
