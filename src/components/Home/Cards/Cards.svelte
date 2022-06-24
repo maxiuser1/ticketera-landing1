@@ -13,9 +13,8 @@
 <style lang="scss">
 	.cards {
 		margin-top: 36px;
-		display: flex;
-		justify-content: flex-start;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: 24px;
-		flex-wrap: wrap;
 	}
 </style>

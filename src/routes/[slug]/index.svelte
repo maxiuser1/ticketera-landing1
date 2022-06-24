@@ -16,7 +16,7 @@
 					fechas: ['Jul 16', 'Jul 17'],
 					destacado: true,
 					banner:
-						'https://res.cloudinary.com/maxitech/image/upload/v1655095418/ticketera/banners/coldplay_fesjvi.jpg',
+						'https://res.cloudinary.com/maxitech/image/upload/v1656038300/ticketera/banners/d3e78e54-7b56-482c-9e1f-3a109416273a.jpg',
 					categoria: 'Conciertos',
 					precios: [
 						{ tipo: 'General', base: '140', descuento: '120' },

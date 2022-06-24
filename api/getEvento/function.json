@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"eventos/{slug}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "items",
+      "databaseName": "quehaydb",
+      "collectionName": "eventos",
+      "connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery": "SELECT * from c where c.slug = {slug}"
+    }
+  ],
+  "scriptFile": "../dist/getEvento/index.js"
+}
