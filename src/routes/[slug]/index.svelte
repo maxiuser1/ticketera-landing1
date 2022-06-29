@@ -48,7 +48,7 @@
 <Info {event} />
 <Entradas {event} />
 <section class="container">
-	<button class="comprar">Ir a comprar entrada</button>
+	<button class="comprar">Ir a comprar</button>
 </section>
 <Artistas />
 
