@@ -134,7 +134,7 @@
 						>
 					</svg>
 				</div>
-				<div class="zona">
+				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
 					<svg width="80%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect width="100%" height="120" rx="4" fill="#FE75FC" />
 						<text
@@ -147,7 +147,7 @@
 						>
 					</svg>
 				</div>
-				<div class="zona">
+				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
 					<svg width="100%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect width="100%" height="120" rx="4" fill="#FFD6FE" />
 						<text
