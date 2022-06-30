@@ -6,7 +6,7 @@ const httpTrigger: AzureFunction = async function (
 	item: any
 ): Promise<void> {
 	context.res = {
-		body: item,
+		body: item[0],
 		headers: {
 			'Content-Type': 'application/json'
 		}

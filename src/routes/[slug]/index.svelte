@@ -1,14 +1,19 @@
 <script lang="ts" context="module">
+	import { apii } from '@components/Layout';
 	import type { Load } from '@sveltejs/kit';
 	import { Entradas, Info, Artistas } from '@components/Evento';
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
+		const resp = await fetch(apii + '/api/eventos/mm');
+		const data = await resp.json();
+		console.log('data', data);
 		const slug = params.slug;
 
 		return {
 			props: {
 				event: {
+					slug: 'mm',
 					id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c',
 					nombre: 'Tour con Calma',
 					artista: 'Daddy Yankee',
@@ -33,6 +38,7 @@
 
 <script lang="ts">
 	import type { Evento } from '@models/index';
+
 	export let event: Evento;
 </script>
 
@@ -48,7 +54,7 @@
 <Info {event} />
 <Entradas {event} />
 <section class="container">
-	<button class="comprar">Ir a comprar </button>
+	<a href="{event.slug}/entradas" class="comprar">Ir a comprar </a>
 </section>
 <Artistas />
 
