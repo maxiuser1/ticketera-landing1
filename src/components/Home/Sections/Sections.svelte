@@ -22,14 +22,14 @@
 </section>
 
 <section class="last" />
-{#each eventGallery.otros as gallery}
+<!-- {#each eventGallery.otros as gallery}
 	<section>
 		<div class="container">
 			<a href="/" class="titulo">{gallery.categoria}</a>
 			<Cards eventos={gallery.eventos} />
 		</div>
 	</section>
-{/each}
+{/each} -->
 
 <section class="preventas">
 	<div class="container">
