@@ -10,15 +10,6 @@
 		const eventsResp = await fetch(apii + '/api/destacados/events');
 		eventGallery.destacados = await eventsResp.json();
 
-		eventGallery.otros = [];
-		for (var categoria of stuff.categories) {
-			const eventsResp = await fetch(apii + `/api/${categoria}/events`);
-			const eventos = await eventsResp.json();
-			if (eventos?.length > 0) {
-				eventGallery.otros.push({ categoria, eventos });
-			}
-		}
-
 		return {
 			props: {
 				banners,

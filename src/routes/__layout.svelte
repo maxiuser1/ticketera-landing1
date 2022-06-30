@@ -1,8 +1,9 @@
-<script context="module">
+<script context="module" lang="ts">
 	import { apii } from '@components/Layout';
-	export async function load({ params, fetch }) {
+	export async function load({ fetch }: { fetch: Function }) {
 		const resp = await fetch(apii + '/api/parametros/categorias');
 		const data = await resp.json();
+
 		return {
 			props: {
 				categories: data[0].values
@@ -14,9 +15,9 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import { Header, Footer } from '@components/Layout';
-	export let categories;
+	export let categories: Array<String>;
 </script>
 
 <Header {categories} />

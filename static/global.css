@@ -24,7 +24,7 @@ html {
 body {
 	margin: var(--header-height) 0 0 0;
 	font-family: Gotham !important;
-	background: #f8f8f8;
+	background: #F9F9F9;
 }
 
 button {
@@ -36,6 +36,7 @@ ul {
 }
 a {
 	text-decoration: none;
+	color:#000;
 }
 img {
 	max-width: 100%;
