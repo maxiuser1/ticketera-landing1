@@ -105,7 +105,7 @@
 <section class="container entrada">
 	<div class="grid">
 		<div class="main">
-			<h2>Entrada</h2>
+			<h2>Entradas</h2>
 			<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
 			<div class="mapa">
 				<div style="margin:20px">
