@@ -1,12 +1,49 @@
-<script type="ts">
+<script lang="ts" context="module">
+	import { apii } from '@components/Layout';
+	import type { Load } from '@sveltejs/kit';
+	import { Zonas, Steps } from '@components/Evento';
+	type Params = { slug: string };
+
+	export const load: Load<Params> = async ({ params, fetch }) => {
+		const resp = await fetch(apii + '/api/eventos/mm');
+		const data = await resp.json();
+
+		return {
+			props: {
+				event: {
+					slug: 'mm',
+					id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c',
+					nombre: 'Tour con Calma',
+					artista: 'Daddy Yankee',
+					lugar: 'Arena Plaza',
+					fechas: ['Jul 16', 'Jul 17'],
+					destacado: true,
+					banner:
+						'https://res.cloudinary.com/maxitech/image/upload/v1656038300/ticketera/banners/d3e78e54-7b56-482c-9e1f-3a109416273a.jpg',
+					categoria: 'Conciertos',
+					precios: [
+						{ tipo: 'General', base: '140', descuento: '120' },
+						{ tipo: 'VIP', base: '240', descuento: '130' },
+						{ tipo: 'Gold 1', base: '340', descuento: '140' },
+						{ tipo: 'Gold 2', base: '560', descuento: '150' },
+						{ tipo: 'Platinium', base: '1803', descuento: '160' }
+					]
+				}
+			}
+		};
+	};
+</script>
+
+<script lang="ts">
+	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
 	import type { Evento } from '@models/index';
-	import { Checked, Arrow } from '@lib/icons';
+	import { Arrow, Box } from '@lib/icons';
 
 	export let event: Evento;
-
-	let selectedStyle = "url('#myGradient')";
-	let seleccionado = 0;
 </script>
+
+<Breadcrumbs {event} />
+<Steps />
 
 <section class="container entrada">
 	<div class="grid">
@@ -33,67 +70,36 @@
 						>
 					</svg>
 				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
-					<svg width="60%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect
-							width="100%"
-							height="120"
-							rx="4"
-							on:click={() => (seleccionado = 1)}
-							fill={seleccionado == 1 ? selectedStyle : '#FC13FA'}
-						/>
-						{#if seleccionado == 1} <Checked /> {/if}
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff"
-						>
-							Box</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
-					<svg width="80%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect
-							width="100%"
-							height="120"
-							rx="4"
-							on:click={() => (seleccionado = 2)}
-							fill={seleccionado == 2 ? selectedStyle : '#FE75FC'}
-						/>
-						{#if seleccionado == 2} <Checked /> {/if}
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff">VIP</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
-					<svg width="100%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect
-							width="100%"
-							height="120"
-							rx="4"
-							on:click={() => (seleccionado = 3)}
-							fill={seleccionado == 3 ? selectedStyle : '#FFD6FE'}
-						/>
-						{#if seleccionado == 3} <Checked /> {/if}
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff">General</text
-						>
-					</svg>
+
+				<div class="asientos">
+					<ul class="fila">
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+					</ul>
+					<ul class="fila">
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+					</ul>
+					<ul class="fila">
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+					</ul>
+					<ul class="fila">
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+						<li><Box color="#D4D4D4" /></li>
+					</ul>
 				</div>
 			</div>
 			<div class="cta">
@@ -113,16 +119,23 @@
 	</div>
 </section>
 
-<svg>
-	<defs>
-		<linearGradient id="myGradient" gradientTransform="rotate(30)">
-			<stop offset="0%" stop-color="#D30ED1" />
-			<stop offset="100%" stop-color="#FF0036" />
-		</linearGradient>
-	</defs>
-</svg>
-
 <style lang="scss">
+	.asientos {
+		width: 900px;
+
+		overflow-x: auto;
+		float: left;
+		.fila {
+			display: block;
+			clear: both;
+			li {
+				float: left;
+				padding-bottom: 20px;
+				padding-left: 20px;
+			}
+		}
+	}
+
 	.cta {
 		text-align: center;
 		margin-top: 52px;
