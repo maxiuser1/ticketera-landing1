@@ -10,4 +10,6 @@ export type Evento = {
 	precios?: Price[];
 	slug: string;
 	zonas?: Zona[];
+	destacado?: boolean;
+	categoria?: string;
 };

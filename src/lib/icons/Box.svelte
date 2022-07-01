@@ -1,8 +1,16 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let color: string;
+
+	const dispatch = createEventDispatcher();
+	function handleClick() {
+		dispatch('clickeado', {});
+	}
 </script>
 
 <svg
+	on:click={handleClick}
 	class="box"
 	width="112"
 	height="60"

@@ -1,45 +1,63 @@
 <script lang="ts" context="module">
 	import { apii } from '@components/Layout';
 	import type { Load } from '@sveltejs/kit';
-	import { Zonas, Steps } from '@components/Evento';
+	import { Steps } from '@components/Evento';
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const resp = await fetch(apii + '/api/eventos/mm');
 		const data = await resp.json();
 
+		let evento: Evento = {
+			slug: 'mm',
+			id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c',
+			nombre: 'Tour con Calma',
+			artista: 'Daddy Yankee',
+			lugar: 'Arena Plaza',
+			fechas: ['Jul 16', 'Jul 17'],
+			destacado: true,
+			banner:
+				'https://res.cloudinary.com/maxitech/image/upload/v1656038300/ticketera/banners/d3e78e54-7b56-482c-9e1f-3a109416273a.jpg',
+			categoria: 'Conciertos',
+			precios: [{ tipo: 'General', base: 140, descuento: 120 }],
+			zonas: []
+		};
+		let zona: Zona = { filas: [], took: true };
+		for (let index = 0; index < 3; index++) {
+			let fila: Fila = { id: index, asientos: [] };
+
+			for (let index2 = 0; index2 < 3; index2++) {
+				fila.asientos.push({
+					id: index2,
+					took: false
+				});
+			}
+			zona.filas.push(fila);
+		}
+		evento.zonas?.push(zona);
+
 		return {
 			props: {
-				event: {
-					slug: 'mm',
-					id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c',
-					nombre: 'Tour con Calma',
-					artista: 'Daddy Yankee',
-					lugar: 'Arena Plaza',
-					fechas: ['Jul 16', 'Jul 17'],
-					destacado: true,
-					banner:
-						'https://res.cloudinary.com/maxitech/image/upload/v1656038300/ticketera/banners/d3e78e54-7b56-482c-9e1f-3a109416273a.jpg',
-					categoria: 'Conciertos',
-					precios: [
-						{ tipo: 'General', base: '140', descuento: '120' },
-						{ tipo: 'VIP', base: '240', descuento: '130' },
-						{ tipo: 'Gold 1', base: '340', descuento: '140' },
-						{ tipo: 'Gold 2', base: '560', descuento: '150' },
-						{ tipo: 'Platinium', base: '1803', descuento: '160' }
-					]
-				}
+				event: evento
 			}
 		};
 	};
 </script>
 
 <script lang="ts">
+	import type { Evento, Fila, Zona } from '@models/index';
+
 	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
-	import type { Evento } from '@models/index';
+
 	import { Arrow, Box } from '@lib/icons';
 
 	export let event: Evento;
+	let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
+	console.log('0f', filas);
+
+	function handleClickeado() {
+		alert('test');
+	}
 </script>
 
 <Breadcrumbs {event} />
@@ -72,38 +90,29 @@
 				</div>
 
 				<div class="asientos">
-					<ul class="fila">
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-					</ul>
-					<ul class="fila">
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-					</ul>
-					<ul class="fila">
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-					</ul>
-					<ul class="fila">
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-						<li><Box color="#D4D4D4" /></li>
-					</ul>
+					{#each filas as fila}
+						<ul class="fila">
+							{#each fila.asientos as asiento}
+								<li>
+									<Box
+										color={asiento.took ? '#ff5260' : '#D4D4D4'}
+										on:clickeado={() => {
+											asiento.took = !asiento.took;
+										}}
+									/>
+								</li>
+							{/each}
+						</ul>
+					{/each}
 				</div>
 			</div>
 			<div class="cta">
-				<a href="../{event.slug}/lugar" class="comprar">Continuar <Arrow /></a>
+				<a href="../{event.slug}/lugar" class="comprar"
+					>Continuar ({filas.reduce(
+						(count, current) => count + current.asientos.filter((t) => t.took).length,
+						0
+					)}) <Arrow /></a
+				>
 			</div>
 		</div>
 		<div class="summary">
@@ -154,15 +163,6 @@
 		.mapa {
 			margin: 20px 0px;
 			width: 100%;
-			.zona {
-				border-radius: 4px;
-				margin: 0 auto;
-				text-align: center;
-
-				svg:hover rect {
-					fill: url('#myGradient');
-				}
-			}
 		}
 
 		.grid {
@@ -241,56 +241,5 @@
 			line-height: 24px;
 			color: #262626;
 		}
-	}
-
-	[data-tooltip] {
-		position: relative;
-		z-index: 2;
-		display: block;
-	}
-
-	[data-tooltip]:before,
-	[data-tooltip]:after {
-		visibility: hidden;
-		opacity: 0;
-		pointer-events: none;
-		transition: 0.2s ease-out;
-		transform: translate(-50%, 5px);
-	}
-
-	[data-tooltip]:before {
-		position: absolute;
-		bottom: 100%;
-		left: 50%;
-		margin-bottom: -15px;
-		padding: 7px;
-		width: 100%;
-		min-width: 70px;
-		max-width: 250px;
-		-webkit-border-radius: 20px;
-		-moz-border-radius: 20px;
-		border-radius: 20px;
-		background-color: #090909;
-
-		color: #fff;
-		content: attr(data-tooltip);
-		text-align: center;
-		font-size: 14px;
-		line-height: 1.2;
-		transition: 0.2s ease-out;
-	}
-
-	[data-tooltip]:after {
-		position: absolute;
-		bottom: 100%;
-		margin-bottom: -25px;
-		left: 50%;
-		width: 0;
-		border-top: 10px solid #000;
-		border-right: 15px solid transparent;
-		border-left: 15px solid transparent;
-		content: '   ';
-		font-size: 0;
-		line-height: 0;
 	}
 </style>
