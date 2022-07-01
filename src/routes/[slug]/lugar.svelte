@@ -293,11 +293,4 @@
 		font-size: 0;
 		line-height: 0;
 	}
-
-	[data-tooltip]:hover:before,
-	[data-tooltip]:hover:after {
-		visibility: visible;
-		opacity: 1;
-		transform: translate(-50%, 0);
-	}
 </style>

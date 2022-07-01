@@ -75,18 +75,8 @@
 				background-color: white;
 			}
 
-			th.general,
-			td.general {
-				text-align: left;
-			}
-
 			th.general {
-				padding-bottom: 12px;
-				font-weight: 700;
-				font-size: 18px;
-				line-height: 22px;
-
-				color: #262626;
+				text-align: left;
 			}
 		}
 	}

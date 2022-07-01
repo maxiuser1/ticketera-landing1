@@ -1,4 +1,5 @@
 import type { Price } from './price';
+import { Zona } from './Zona';
 export type Evento = {
 	id?: string;
 	nombre?: string;
@@ -8,4 +9,5 @@ export type Evento = {
 	lugar?: string;
 	precios?: Price[];
 	slug: string;
+	zonas?: Zona[];
 };
