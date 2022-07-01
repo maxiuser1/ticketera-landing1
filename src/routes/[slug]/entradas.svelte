@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { apii } from '@components/Layout';
 	import type { Load } from '@sveltejs/kit';
-	import { Entradas, Info, Artistas } from '@components/Evento';
+	import { Entradas, Info, Artistas, Zonas } from '@components/Evento';
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
@@ -40,6 +40,7 @@
 	import type { Evento } from '@models/index';
 
 	export let event: Evento;
+	let seleccionado: string = '';
 </script>
 
 <section class="breacrumbs">
@@ -102,184 +103,9 @@
 	</div>
 </section>
 
-<section class="container entrada">
-	<div class="grid">
-		<div class="main">
-			<h2>Entradas</h2>
-			<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
-			<div class="mapa">
-				<div style="margin:20px">
-					<svg width="100%" height="52" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect width="100%" height="120" rx="4" fill="#FFDADB" />
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#FF888F">Escenario</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
-					<svg width="60%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect width="100%" height="120" rx="4" fill="#FC13FA" />
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff">Box</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
-					<svg width="80%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect width="100%" height="120" rx="4" fill="#FE75FC" />
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff">VIP</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
-					<svg width="100%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect width="100%" height="120" rx="4" fill="#FFD6FE" />
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#D30ED1">General</text
-						>
-					</svg>
-				</div>
-			</div>
-		</div>
-		<div class="summary">test</div>
-	</div>
-</section>
+<Zonas {event} />
 
 <style lang="scss">
-	[data-tooltip] {
-		position: relative;
-		z-index: 2;
-		display: block;
-	}
-
-	[data-tooltip]:before,
-	[data-tooltip]:after {
-		visibility: hidden;
-		opacity: 0;
-		pointer-events: none;
-		transition: 0.2s ease-out;
-		transform: translate(-50%, 5px);
-	}
-
-	[data-tooltip]:before {
-		position: absolute;
-		bottom: 100%;
-		left: 50%;
-		margin-bottom: -15px;
-		padding: 7px;
-		width: 100%;
-		min-width: 70px;
-		max-width: 250px;
-		-webkit-border-radius: 20px;
-		-moz-border-radius: 20px;
-		border-radius: 20px;
-		background-color: #090909;
-
-		color: #fff;
-		content: attr(data-tooltip);
-		text-align: center;
-		font-size: 14px;
-		line-height: 1.2;
-		transition: 0.2s ease-out;
-	}
-
-	[data-tooltip]:after {
-		position: absolute;
-		bottom: 100%;
-		margin-bottom: -25px;
-		left: 50%;
-		width: 0;
-		border-top: 10px solid #000;
-		border-right: 15px solid transparent;
-		border-left: 15px solid transparent;
-		content: '   ';
-		font-size: 0;
-		line-height: 0;
-	}
-
-	[data-tooltip]:hover:before,
-	[data-tooltip]:hover:after {
-		visibility: visible;
-		opacity: 1;
-		transform: translate(-50%, 0);
-	}
-	[data-tooltip='false']:hover:before,
-	[data-tooltip='false']:hover:after {
-		visibility: hidden;
-		opacity: 0;
-	}
-
-	.entrada {
-		margin-bottom: 50px;
-
-		.mapa {
-			margin: 20px 0px;
-			width: 100%;
-			.zona {
-				border-radius: 4px;
-				margin: 0 auto;
-				text-align: center;
-				cursor: pointer;
-			}
-		}
-
-		.grid {
-			display: grid;
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			width: 100%;
-			gap: 2rem;
-
-			h2 {
-				font-weight: 700;
-				font-size: 24px;
-				line-height: 29px;
-				color: #000000;
-				margin-bottom: 8px;
-			}
-
-			h3 {
-				font-weight: 400;
-				font-size: 16px;
-				line-height: 16px;
-				color: #1b1b1b;
-			}
-
-			.main {
-				padding: 40px;
-				grid-column: span 2 / span 2;
-				background-color: white;
-				border-radius: 8px;
-			}
-
-			.summary {
-				padding: 40px;
-				background-color: white;
-				border-radius: 8px;
-			}
-		}
-	}
-
 	.wizard {
 		.pasos {
 			margin: 72px 0px;

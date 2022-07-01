@@ -53,15 +53,17 @@
 
 <Info {event} />
 <Entradas {event} />
-<section class="container">
+<section class="container cta">
 	<a href="{event.slug}/entradas" class="comprar">Ir a comprar </a>
 </section>
 <Artistas />
 
 <style lang="scss">
-	.comprar {
+	.cta {
 		margin-top: 52px;
 		margin-bottom: 60px;
+	}
+	.comprar {
 		padding: 12px 16px;
 		background: linear-gradient(270deg, #ff0036 0%, #d30ed1 100%);
 		border-radius: 4px;
