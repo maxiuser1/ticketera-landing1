@@ -53,7 +53,6 @@
 
 	export let event: Evento;
 	let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
-	console.log('0f', filas);
 
 	function handleClickeado() {
 		alert('test');

@@ -1,11 +1,31 @@
 <script type="ts">
-	import type { Evento } from '@models/index';
+	import type { Compra, Evento } from '@models/index';
 	import { Checked, Arrow } from '@lib/icons';
+	import { compraData } from './store';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { current_component } from 'svelte/internal';
 
 	export let event: Evento;
-
 	let selectedStyle = "url('#myGradient')";
-	let seleccionado = 0;
+	let seleccionado = '';
+
+	onMount(async () => {
+		if ($compraData.zona?.nombre) seleccionado = $compraData.zona.nombre;
+	});
+
+	const seleccionar = (zona: string) => {
+		seleccionado = zona;
+	};
+
+	const continuarClick = () => {
+		compraData.update((current) => ({
+			...current,
+			zona: { nombre: seleccionado }
+		}));
+
+		goto(`../${event.slug}/lugar`);
+	};
 </script>
 
 <section class="container entrada">
@@ -39,10 +59,10 @@
 							width="100%"
 							height="120"
 							rx="4"
-							on:click={() => (seleccionado = 1)}
-							fill={seleccionado == 1 ? selectedStyle : '#FC13FA'}
+							on:click={() => seleccionar('Box')}
+							fill={seleccionado == 'Box' ? selectedStyle : '#FC13FA'}
 						/>
-						{#if seleccionado == 1} <Checked /> {/if}
+						{#if seleccionado == 'Box'} <Checked /> {/if}
 						<text
 							x="50%"
 							y="50%"
@@ -61,10 +81,10 @@
 							width="100%"
 							height="120"
 							rx="4"
-							on:click={() => (seleccionado = 2)}
-							fill={seleccionado == 2 ? selectedStyle : '#FE75FC'}
+							on:click={() => seleccionar('VIP')}
+							fill={seleccionado == 'VIP' ? selectedStyle : '#FE75FC'}
 						/>
-						{#if seleccionado == 2} <Checked /> {/if}
+						{#if seleccionado == 'VIP'} <Checked /> {/if}
 						<text
 							x="50%"
 							y="50%"
@@ -81,10 +101,10 @@
 							width="100%"
 							height="120"
 							rx="4"
-							on:click={() => (seleccionado = 3)}
-							fill={seleccionado == 3 ? selectedStyle : '#FFD6FE'}
+							on:click={() => seleccionar('General')}
+							fill={seleccionado == 'General' ? selectedStyle : '#FFD6FE'}
 						/>
-						{#if seleccionado == 3} <Checked /> {/if}
+						{#if seleccionado == 'General'} <Checked /> {/if}
 						<text
 							x="50%"
 							y="50%"
@@ -97,7 +117,9 @@
 				</div>
 			</div>
 			<div class="cta">
-				<a href="../{event.slug}/lugar" class="comprar">Continuar <Arrow /></a>
+				<!-- <a href="../{event.slug}/lugar" class="comprar">Continuar <Arrow /></a> -->
+
+				<button on:click={continuarClick} class="comprar">Continuar <Arrow /> </button>
 			</div>
 		</div>
 		<div class="summary">

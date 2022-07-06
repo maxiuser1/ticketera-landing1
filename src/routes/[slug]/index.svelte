@@ -7,7 +7,6 @@
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const resp = await fetch(apii + '/api/eventos/mm');
 		const data = await resp.json();
-		console.log('data', data);
 		const slug = params.slug;
 
 		return {
@@ -37,9 +36,23 @@
 </script>
 
 <script lang="ts">
-	import type { Evento } from '@models/index';
+	import type { Evento, Compra } from '@models/index';
+	import { goto } from '$app/navigation';
+	import { compraData } from '@components/Evento/store';
 
 	export let event: Evento;
+
+	const comprarClick = () => {
+		const compra: Compra = {
+			evento: {
+				id: event.id,
+				slug: event.slug,
+				artista: event.artista
+			}
+		};
+		compraData.set(compra);
+		goto(`${event.slug}/entradas`);
+	};
 </script>
 
 <section>
@@ -54,7 +67,7 @@
 <Info {event} />
 <Entradas {event} />
 <section class="container cta">
-	<a href="{event.slug}/entradas" class="comprar">Ir a comprar </a>
+	<button on:click={comprarClick} class="comprar">Ir a comprar </button>
 </section>
 <Artistas />
 

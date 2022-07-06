@@ -94,7 +94,7 @@ export default class ShortUniqueId extends Function {
 		/* tslint:disable no-console */
 		if (this.debug === true) {
 			if (typeof console !== 'undefined' && console !== null) {
-				return console.log(...finalArgs);
+				return console.info(...finalArgs);
 			}
 		}
 		/* tslint:enable no-console */
