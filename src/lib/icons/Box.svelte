@@ -2,6 +2,9 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let color: string;
+	export let disabled: boolean;
+	export let width: number;
+	// let height: number = width * 0.7;
 
 	const dispatch = createEventDispatcher();
 	function handleClick() {
@@ -9,30 +12,36 @@
 	}
 </script>
 
-<svg
-	on:click={handleClick}
-	class="box"
-	width="112"
-	height="60"
-	viewBox="0 0 112 60"
-	fill="none"
-	xmlns="http://www.w3.org/2000/svg"
->
-	<path
-		class="b"
-		d="M0.810182 24.7604C0.371285 17.8477 5.85952 12 12.7861 12H99.2139C106.14 12 111.629 17.8477 111.19 24.7604L110.428 36.7604C110.027 43.0798 104.784 48 98.452 48H13.548C7.2158 48 1.97332 43.0798 1.57209 36.7604L0.810182 24.7604Z"
+{#if disabled}
+	<svg
+		{width}
+		viewBox="0 0 14 12"
+		xmlns="http://www.w3.org/2000/svg"
+		stroke="#D4D4D4"
+		stroke-width="1"
+		fill="none"
+	>
+		<path
+			d="M1 0 3 0A1 1 90 013 2L1 2A1 1 90 011 0ZM6 0 8 0A1 1 90 018 2L6 2A1 1 90 016 0ZM11 0 13 0A1 1 90 0113 2L11 2A1 1 90 0111 0ZM3 3 11 3A1 1 90 0111 9L3 9A1 1 90 013 3ZM1 10 3 10A1 1 90 013 12L1 12A1 1 90 011 10ZM6 10 8 10A1 1 90 018 12L6 12A1 1 90 016 10ZM11 10 13 10A1 1 90 0113 12L11 12A1 1 90 0111 10Z"
+		/>
+	</svg>
+{:else}
+	<svg
+		on:click={handleClick}
+		{width}
+		viewBox="0 0 14 12"
+		class="box"
+		xmlns="http://www.w3.org/2000/svg"
 		fill={color}
-	/>
-	<rect class="b" x="8" y="52" width="30" height="8" rx="4" fill={color} />
-	<rect class="b" x="41" y="52" width="30" height="8" rx="4" fill={color} />
-	<rect class="b" x="74" y="52" width="30" height="8" rx="4" fill={color} />
-	<rect class="b" x="8" width="30" height="8" rx="4" fill={color} />
-	<rect class="b" x="41" width="30" height="8" rx="4" fill={color} />
-	<rect class="b" x="74" width="30" height="8" rx="4" fill={color} />
-</svg>
+	>
+		<path
+			d="M1 0 3 0A1 1 90 013 2L1 2A1 1 90 011 0ZM6 0 8 0A1 1 90 018 2L6 2A1 1 90 016 0ZM11 0 13 0A1 1 90 0113 2L11 2A1 1 90 0111 0ZM3 3 11 3A1 1 90 0111 9L3 9A1 1 90 013 3ZM1 10 3 10A1 1 90 013 12L1 12A1 1 90 011 10ZM6 10 8 10A1 1 90 018 12L6 12A1 1 90 016 10ZM11 10 13 10A1 1 90 0113 12L11 12A1 1 90 0111 10Z"
+		/>
+	</svg>
+{/if}
 
 <style>
-	.box:hover .b {
+	.box:hover {
 		fill: #ff5260;
 	}
 </style>

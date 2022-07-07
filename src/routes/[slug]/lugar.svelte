@@ -23,17 +23,168 @@
 			zonas: []
 		};
 		let zona: Zona = { filas: [], took: true };
-		for (let index = 0; index < 3; index++) {
-			let fila: Fila = { id: index, asientos: [] };
 
-			for (let index2 = 0; index2 < 3; index2++) {
-				fila.asientos.push({
-					id: index2,
-					took: false
-				});
-			}
-			zona.filas.push(fila);
-		}
+		const fila1: Fila = {
+			id: 0,
+			asientos: [
+				{ id: 0, s: 0 },
+				{ id: 1, s: 0 },
+				{ id: 2, s: 0 },
+				{ id: 3, s: -1 },
+				{ id: 4, s: -1 },
+				{ id: 5, s: -1 },
+				{ id: 6, s: -1 },
+				{ id: 7, s: -1 },
+				{ id: 8, s: 0 },
+				{ id: 10, s: 0 },
+				{ id: 11, s: -1 },
+				{ id: 12, s: -1 },
+				{ id: 13, s: -1 },
+				{ id: 14, s: -1 },
+				{ id: 15, s: -1 },
+				{ id: 16, s: 0 },
+				{ id: 17, s: 0 },
+				{ id: 18, s: 0 }
+			]
+		};
+
+		const fila2: Fila = {
+			id: 1,
+			asientos: [
+				{ id: 0, s: 0 },
+				{ id: 1, s: 0 },
+				{ id: 2, s: 0 },
+				{ id: 3, s: -1 },
+				{ id: 4, s: -1 },
+				{ id: 5, s: -1 },
+				{ id: 6, s: -1 },
+				{ id: 7, s: -1 },
+				{ id: 8, s: -1 },
+				{ id: 10, s: -1 },
+				{ id: 11, s: -1 },
+				{ id: 12, s: -1 },
+				{ id: 13, s: -1 },
+				{ id: 14, s: -1 },
+				{ id: 15, s: -1 },
+				{ id: 16, s: 0 },
+				{ id: 17, s: 0 },
+				{ id: 18, s: 0 }
+			]
+		};
+
+		const fila3: Fila = {
+			id: 2,
+			asientos: [
+				{ id: 0, s: 0 },
+				{ id: 1, s: 0 },
+				{ id: 2, s: 0 },
+				{ id: 3, s: -1 },
+				{ id: 4, s: -1 },
+				{ id: 5, s: -1 },
+				{ id: 6, s: 2 },
+				{ id: 7, s: -1 },
+				{ id: 8, s: -1 },
+				{ id: 10, s: -1 },
+				{ id: 11, s: -1 },
+				{ id: 12, s: -1 },
+				{ id: 13, s: -1 },
+				{ id: 14, s: -1 },
+				{ id: 15, s: -1 },
+				{ id: 16, s: 0 },
+				{ id: 17, s: 0 },
+				{ id: 18, s: 0 }
+			]
+		};
+
+		const fila4: Fila = {
+			id: 3,
+			asientos: [
+				{ id: 0, s: 0 },
+				{ id: 1, s: -1 },
+				{ id: 2, s: -1 },
+				{ id: 3, s: -1 },
+				{ id: 4, s: -1 },
+				{ id: 5, s: -1 },
+				{ id: 6, s: -1 },
+				{ id: 7, s: -1 },
+				{ id: 8, s: -1 },
+				{ id: 10, s: -1 },
+				{ id: 11, s: -1 },
+				{ id: 12, s: -1 },
+				{ id: 13, s: -1 },
+				{ id: 14, s: -1 },
+				{ id: 15, s: -1 },
+				{ id: 16, s: -1 },
+				{ id: 17, s: -1 },
+				{ id: 18, s: 0 }
+			]
+		};
+
+		const fila5: Fila = {
+			id: 4,
+			asientos: [
+				{ id: 0, s: 0 },
+				{ id: 1, s: -1 },
+				{ id: 2, s: -1 },
+				{ id: 3, s: -1 },
+				{ id: 4, s: -1 },
+				{ id: 5, s: -1 },
+				{ id: 6, s: -1 },
+				{ id: 7, s: -1 },
+				{ id: 8, s: -1 },
+				{ id: 10, s: -1 },
+				{ id: 11, s: -1 },
+				{ id: 12, s: -1 },
+				{ id: 13, s: -1 },
+				{ id: 14, s: -1 },
+				{ id: 15, s: -1 },
+				{ id: 16, s: -1 },
+				{ id: 17, s: -1 },
+				{ id: 18, s: 0 }
+			]
+		};
+
+		const fila6: Fila = {
+			id: 5,
+			asientos: [
+				{ id: 0, s: -1 },
+				{ id: 1, s: -1 },
+				{ id: 2, s: -1 },
+				{ id: 3, s: -1 },
+				{ id: 4, s: -1 },
+				{ id: 5, s: -1 },
+				{ id: 6, s: -1 },
+				{ id: 7, s: -1 },
+				{ id: 8, s: -1 },
+				{ id: 10, s: -1 },
+				{ id: 11, s: -1 },
+				{ id: 12, s: -1 },
+				{ id: 13, s: -1 },
+				{ id: 14, s: -1 },
+				{ id: 15, s: -1 },
+				{ id: 16, s: -1 },
+				{ id: 17, s: -1 },
+				{ id: 18, s: -1 }
+			]
+		};
+
+		zona.filas.push(fila1);
+		zona.filas.push(fila2);
+		zona.filas.push(fila3);
+		zona.filas.push(fila4);
+		zona.filas.push(fila5);
+
+		// for (let index = 0; index < 3; index++) {
+		// 	let fila: Fila = { id: index, asientos: [] };
+
+		// 	for (let index2 = 0; index2 < 3; index2++) {
+		// 		fila.asientos.push({
+		// 			id: index2,
+		// 			took: false
+		// 		});
+		// 	}
+		// 	zona.filas.push(fila);
+		// }
 		evento.zonas?.push(zona);
 
 		return {
@@ -53,6 +204,10 @@
 
 	export let event: Evento;
 	let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
+	const sitWidth = 25;
+	// const filaWidth = (sitWidth + 4) * filas[0].asientos.length;
+	const filaWidth = 100;
+	console.log('a', sitWidth, 'b', filaWidth);
 
 	function handleClickeado() {
 		alert('test');
@@ -66,39 +221,25 @@
 	<div class="grid">
 		<div class="main">
 			<h2>Entradas</h2>
-			<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
+			<h3>Seleccione el asiento</h3>
 			<div class="mapa">
-				<div style="margin:20px">
-					<svg
-						class="escenario"
-						width="100%"
-						height="52"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<rect width="100%" height="120" rx="4" fill="#FFDADB" />
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#FF888F">Escenario</text
-						>
-					</svg>
-				</div>
-
-				<div class="asientos">
+				<div class="asientos" style:width="{filaWidth} px">
 					{#each filas as fila}
 						<ul class="fila">
 							{#each fila.asientos as asiento}
-								<li>
-									<Box
-										color={asiento.took ? '#ff5260' : '#D4D4D4'}
-										on:clickeado={() => {
-											asiento.took = !asiento.took;
-										}}
-									/>
+								<li style:min-width="{sitWidth}px">
+									{#if asiento.s != 0}
+										<Box
+											disabled={asiento.s == 2}
+											width={sitWidth}
+											color={asiento.s == 1 ? '#ff5260' : asiento.s == -1 ? '#D4D4D4' : 'blue'}
+											on:clickeado={() => {
+												if (asiento.s < 2) {
+													asiento.s = asiento.s * -1;
+												}
+											}}
+										/>
+									{/if}
 								</li>
 							{/each}
 						</ul>
@@ -106,9 +247,9 @@
 				</div>
 			</div>
 			<div class="cta">
-				<a href="../{event.slug}/lugar" class="comprar"
+				<a href="../{event.slug}/resumen" class="comprar"
 					>Continuar ({filas.reduce(
-						(count, current) => count + current.asientos.filter((t) => t.took).length,
+						(count, current) => count + current.asientos.filter((t) => t.s == 1).length,
 						0
 					)}) <Arrow /></a
 				>
@@ -129,18 +270,14 @@
 
 <style lang="scss">
 	.asientos {
-		width: 900px;
-
+		padding-top: 30px;
+		width: 99%;
 		overflow-x: auto;
-		float: left;
 		.fila {
-			display: block;
-			clear: both;
-			li {
-				float: left;
-				padding-bottom: 20px;
-				padding-left: 20px;
-			}
+			display: flex;
+			flex-wrap: nowrap;
+			gap: 10px;
+			padding-bottom: 10px;
 		}
 	}
 

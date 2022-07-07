@@ -1,4 +1,4 @@
 export type Asiento = {
 	id: number;
-	took: boolean;
+	s: number;
 };

@@ -41,6 +41,7 @@
 
 	export let event: Evento;
 	export let pago: any;
+	let sitWidth: number = 30;
 
 	function openForm() {
 		VisanetCheckout.configure({
@@ -53,7 +54,7 @@
 			timeouturl: 'about:blank',
 			merchantlogo: 'img/comercio.png',
 			formbuttoncolor: '#000000',
-			action: 'paginaRespuesta',
+			action: 'exitoso',
 			complete: function (params: any) {
 				alert(JSON.stringify(params));
 			}
@@ -70,12 +71,28 @@
 
 <Breadcrumbs {event} />
 <Steps />
-{JSON.stringify(pago)}
 <section class="container entrada">
 	<div class="grid">
 		<div class="main">
+			<h2>Resumen</h2>
+
+			<div class="compras">
+				<div class="fila">
+					<div class="asiento">
+						<div>
+							<Box width={sitWidth} color="red" disabled={false} />
+						</div>
+						<div>
+							<h1>Zona Box</h1>
+							<h5>Sillas</h5>
+						</div>
+					</div>
+					<div>S/ 480.00</div>
+				</div>
+			</div>
+
 			<div class="cta">
-				<button type="button" on:click={openForm}>test</button>
+				<button type="button" class="comprar" on:click={openForm}> Comprar </button>
 			</div>
 		</div>
 		<div class="summary">
@@ -92,6 +109,23 @@
 </section>
 
 <style lang="scss">
+	.compras {
+		padding-top: 30px;
+		.asiento {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+		.fila {
+			padding: 20px;
+			border-radius: 8px;
+			background-color: #f9f9f9;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+
 	.cta {
 		text-align: center;
 		margin-top: 52px;
@@ -102,6 +136,10 @@
 			border-radius: 4px;
 			border: none;
 			color: white;
+
+			&:hover {
+				background: #d30ed1;
+			}
 		}
 	}
 	.entrada {
