@@ -43,32 +43,35 @@
 	export let pago: any;
 	let sitWidth: number = 30;
 
-	function openForm() {
-		VisanetCheckout.configure({
-			sessiontoken: pago.sessiontoken,
-			channel: 'web',
-			merchantid: pago.merchantid,
-			purchasenumber: pago.purchasenumber,
-			amount: '10.00',
-			expirationminutes: '20',
-			timeouturl: 'about:blank',
-			merchantlogo: 'https://www.quehay.pe/img/logo.png',
-			formbuttoncolor: '#d30ed1',
-			action: 'exitoso',
-			complete: function (params: any) {
-				alert(JSON.stringify(params));
-			}
-		});
-		VisanetCheckout.open();
+	// function openForm() {
+	// 	VisanetCheckout.configure({
+	// 		sessiontoken: pago.sessiontoken,
+	// 		channel: 'web',
+	// 		merchantid: pago.merchantid,
+	// 		purchasenumber: pago.purchasenumber,
+	// 		amount: '10.00',
+	// 		expirationminutes: '20',
+	// 		timeouturl: 'about:blank',
+	// 		merchantlogo: 'https://www.quehay.pe/img/logo.png',
+	// 		formbuttoncolor: '#d30ed1',
+	// 		action: 'exitoso',
+	// 		complete: function (params: any) {}
+	// 	});
+	// 	VisanetCheckout.open();
+	// }
+
+	function pagoCallback(params: any) {
+		console.log('params', params);
 	}
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
 	<script
 		type="text/javascript"
 		src="https://static-content-qas.vnforapps.com/v2/js/checkout.js"></script>
-</svelte:head>
+</svelte:head> -->
 
+{JSON.stringify(pago)}
 <Breadcrumbs {event} />
 <Steps />
 <section class="container entrada">
@@ -92,7 +95,22 @@
 			</div>
 
 			<div class="cta">
-				<button type="button" class="comprar" on:click={openForm}> Comprar </button>
+				<!-- <button type="button" class="comprar" on:click={openForm}> Comprar </button> -->
+
+				<form action="exitoso" method="post">
+					<script
+						type="text/javascript"
+						src="https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true"
+						data-sessiontoken={pago.sessiontoken}
+						data-channel="web"
+						data-merchantid={pago.merchantid}
+						data-purchasenumber={pago.purchasenumber}
+						data-amount="10.0"
+						data-expirationminutes="20"
+						data-timeouturl="about:blank"
+						data-merchantlogo="img/comercio.png"
+						data-formbuttoncolor="#000000"></script>
+				</form>
 			</div>
 		</div>
 		<div class="summary">

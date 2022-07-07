@@ -106,15 +106,15 @@
 	.preventas {
 		margin-bottom: 80px;
 	}
-	.last {
-		margin: 80px 0;
-		background-image: url('https://res.cloudinary.com/maxitech/image/upload/v1655518696/ticketera/banners/indiemusic_hfo750.jpg');
-		background-repeat: no-repeat;
-		background-size: cover;
-		align-self: center;
-		width: 100%;
-		height: 200px;
-	}
+	// .last {
+	// 	margin: 80px 0;
+	// 	background-image: url('https://res.cloudinary.com/maxitech/image/upload/v1655518696/ticketera/banners/indiemusic_hfo750.jpg');
+	// 	background-repeat: no-repeat;
+	// 	background-size: cover;
+	// 	align-self: center;
+	// 	width: 100%;
+	// 	height: 200px;
+	// }
 	.container {
 		margin-top: 60px;
 	}
