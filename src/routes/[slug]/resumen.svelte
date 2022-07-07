@@ -52,8 +52,8 @@
 			amount: '10.00',
 			expirationminutes: '20',
 			timeouturl: 'about:blank',
-			merchantlogo: 'img/comercio.png',
-			formbuttoncolor: '#000000',
+			merchantlogo: 'https://www.quehay.pe/img/logo.png',
+			formbuttoncolor: '#d30ed1',
 			action: 'exitoso',
 			complete: function (params: any) {
 				alert(JSON.stringify(params));
