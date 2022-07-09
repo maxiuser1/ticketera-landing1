@@ -1,3 +1,9 @@
+<script context="module">
+	export const router = false;
+	export const hydrate = false;
+	export const prerender = false;
+</script>
+
 <section class="container exitoso">
 	<div class="icon">
 		<svg
@@ -45,7 +51,7 @@
 		</svg>
 	</div>
 	<div class="pago">
-		<h1>Pago exitoso</h1>
+		<h1>Pago Exitoso</h1>
 		<h2>Lugar reservado</h2>
 		<p>El pago se realizó con éxito. ¿Desea que se envíe el voucher con el detalle a tu correo?</p>
 	</div>

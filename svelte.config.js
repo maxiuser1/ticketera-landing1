@@ -10,6 +10,7 @@ const config = {
 
 	kit: {
 		adapter: azure(),
+		floc: true,
 		vite: {
 			resolve: {
 				alias: {

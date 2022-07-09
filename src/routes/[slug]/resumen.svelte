@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	export const hydrate = false;
 	import { apii } from '@components/Layout';
 	import type { Load } from '@sveltejs/kit';
 	import { Steps } from '@components/Evento';
@@ -42,36 +43,8 @@
 	export let event: Evento;
 	export let pago: any;
 	let sitWidth: number = 30;
-
-	// function openForm() {
-	// 	VisanetCheckout.configure({
-	// 		sessiontoken: pago.sessiontoken,
-	// 		channel: 'web',
-	// 		merchantid: pago.merchantid,
-	// 		purchasenumber: pago.purchasenumber,
-	// 		amount: '10.00',
-	// 		expirationminutes: '20',
-	// 		timeouturl: 'about:blank',
-	// 		merchantlogo: 'https://www.quehay.pe/img/logo.png',
-	// 		formbuttoncolor: '#d30ed1',
-	// 		action: 'exitoso',
-	// 		complete: function (params: any) {}
-	// 	});
-	// 	VisanetCheckout.open();
-	// }
-
-	function pagoCallback(params: any) {
-		console.log('params', params);
-	}
 </script>
 
-<!-- <svelte:head>
-	<script
-		type="text/javascript"
-		src="https://static-content-qas.vnforapps.com/v2/js/checkout.js"></script>
-</svelte:head> -->
-
-{JSON.stringify(pago)}
 <Breadcrumbs {event} />
 <Steps />
 <section class="container entrada">
@@ -95,8 +68,6 @@
 			</div>
 
 			<div class="cta">
-				<!-- <button type="button" class="comprar" on:click={openForm}> Comprar </button> -->
-
 				<form action="exitoso" method="post">
 					<script
 						type="text/javascript"
@@ -108,7 +79,7 @@
 						data-amount="10.0"
 						data-expirationminutes="20"
 						data-timeouturl="about:blank"
-						data-merchantlogo="img/comercio.png"
+						data-merchantlogo="https://www.quehay.pe/img/logo.png"
 						data-formbuttoncolor="#000000"></script>
 				</form>
 			</div>
