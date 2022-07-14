@@ -1,15 +1,15 @@
 <script context="module" lang="ts">
 	import { apii } from '@components/Layout';
 	export async function load({ fetch }: { fetch: Function }) {
-		const resp = await fetch(apii + '/api/parametros/categorias');
-		const data = await resp.json();
+		// const resp = await fetch(apii + '/api/parametros/categorias');
+		// const data = await resp.json();
 
 		return {
 			props: {
-				categories: data[0].values
+				categories: ['a']
 			},
 			stuff: {
-				categories: data[0].values
+				categories: ['a']
 			}
 		};
 	}

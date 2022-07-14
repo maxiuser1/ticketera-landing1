@@ -6,7 +6,12 @@
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
-		const pagores = await fetch(apii + '/api/iniciarPago');
+		const pagores = await fetch(apii + '/api/miturno', {
+			method: 'POST',
+			body: JSON.stringify({
+				evento: { id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c', zona: '1', asient: '2' }
+			})
+		});
 		const datapago = await pagores.json();
 
 		let evento: Evento = {
@@ -45,6 +50,7 @@
 	let sitWidth: number = 30;
 </script>
 
+{JSON.stringify(pago)}
 <Breadcrumbs {event} />
 <Steps />
 <section class="container entrada">
@@ -68,7 +74,7 @@
 			</div>
 
 			<div class="cta">
-				<form action="exitoso" method="post">
+				<form action="compra/{pago.id}" method="post">
 					<script
 						type="text/javascript"
 						src="https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true"
