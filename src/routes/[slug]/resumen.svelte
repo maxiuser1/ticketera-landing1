@@ -7,7 +7,7 @@
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const pagores = await fetch(apii + '/api/miturno', {
-			method: 'POST',
+			method: 'PATCH',
 			body: JSON.stringify({
 				evento: { id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c', zona: '1', asient: '2' }
 			})

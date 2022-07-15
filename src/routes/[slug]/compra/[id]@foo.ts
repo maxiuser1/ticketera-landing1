@@ -5,7 +5,7 @@ export async function post({ request, params }) {
 	const data = Object.fromEntries(new URLSearchParams(parameters));
 
 	const rsp = await fetch(apii + '/api/autorizar/' + params.id, {
-		method: 'POST',
+		method: 'PATCH',
 		body: JSON.stringify(data)
 	});
 
