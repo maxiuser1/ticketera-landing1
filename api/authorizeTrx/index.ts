@@ -7,21 +7,21 @@ const httpTrigger: AzureFunction = async function (
 	turno: any
 ): Promise<void> {
 	context.log(turno);
-	const merchantId = '522591303';
+	const merchantId = '650213685';
 	const transaction = req.body;
 	context.log(transaction);
 
 	const { data: token } = await axios.get(
-		'https://apitestenv.vnforapps.com/api.security/v1/security',
+		'https://apiprod.vnforapps.com/api.security/v1/security',
 		{
 			headers: {
-				Authorization: 'Basic aW50ZWdyYWNpb25lc0BuaXViaXouY29tLnBlOl83ejNAOGZG'
+				Authorization: 'Basic cGUuam9zZS5jYWxkZXJvbkBnbWFpbC5jb206Umd4Wi0wU3c='
 			}
 		}
 	);
 	try {
 		const resultado = await axios.post(
-			`https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/${merchantId}`,
+			`https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/${merchantId}`,
 			{
 				channel: 'web',
 				captureType: 'manual',

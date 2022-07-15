@@ -7,23 +7,23 @@ const httpTrigger: AzureFunction = async function (
 	context: Context,
 	req: HttpRequest
 ): Promise<void> {
-	const merchantId = '522591303';
+	const merchantId = '650213685';
 
 	const uid: ShortUniqueId = new ShortUniqueId({
 		length: 12
 	});
 
 	const { data: token } = await axios.get(
-		'https://apitestenv.vnforapps.com/api.security/v1/security',
+		'https://apiprod.vnforapps.com/api.security/v1/security',
 		{
 			headers: {
-				Authorization: 'Basic aW50ZWdyYWNpb25lc0BuaXViaXouY29tLnBlOl83ejNAOGZG'
+				Authorization: 'Basic cGUuam9zZS5jYWxkZXJvbkBnbWFpbC5jb206Umd4Wi0wU3c='
 			}
 		}
 	);
 
 	const { data: session } = await axios.post(
-		`https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/${merchantId}`,
+		`https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/${merchantId}`,
 		{
 			channel: 'web',
 			amount: '10.00',
