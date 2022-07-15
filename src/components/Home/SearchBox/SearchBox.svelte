@@ -1,11 +1,7 @@
-<section class="bind">
+<section class="bind container">
 	<div class="searchbox">
 		<div class="box">
-			<input
-				type="search"
-				class="input"
-				placeholder="Ejm: Daddy Yankee, Karol G, Plaza Arena, etc..."
-			/>
+			<input type="search" class="input" placeholder="Ejm: Daddy Yankee" />
 			<div class="boton">
 				<svg
 					width="18"
@@ -35,14 +31,19 @@
 			justify-content: center;
 
 			.box {
-				width: 756px;
-				height: 56px;
+				width: 100%;
+				height: 48px;
+
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				background-color: white;
 				box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
 				border-radius: 4px;
+
+				@include breakpoint($md) {
+					height: 56px;
+				}
 			}
 
 			.input {

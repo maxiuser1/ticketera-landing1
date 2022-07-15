@@ -101,15 +101,22 @@
 			background-size: 100% 100%;
 			background-repeat: no-repeat;
 			background-position: center center;
-			height: 440px;
+			height: 149px;
+
+			@include breakpoint($md) {
+				height: 440px;
+			}
 		}
 
 		.botonera {
 			width: 100%;
 			position: absolute;
 			bottom: 0px;
-			display: flex;
-			justify-content: center;
+			display: none;
+			@include breakpoint($md) {
+				display: flex;
+				justify-content: center;
+			}
 		}
 
 		.puntos {

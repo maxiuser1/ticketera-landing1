@@ -2,6 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import Logo from './Logo.svelte';
 	import Socials from './Socials';
+	import { Menu } from '@lib/icons';
 	import Nav from './Nav';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
@@ -20,7 +21,7 @@
 
 <header class="main">
 	<nav class="container">
-		<Socials />
+		<Socials on:togglemenu={toggle} closable={visible} />
 		<Logo />
 		<Nav on:togglemenu={toggle} closable={visible} />
 	</nav>
@@ -38,6 +39,15 @@
 {/if}
 
 <style lang="scss">
+	.navbar-toggle {
+		border: none;
+		background-color: rgba(0, 0, 0, 0);
+		background-image: none;
+		display: block;
+		@include breakpoint($md) {
+			display: none;
+		}
+	}
 	.main {
 		width: 100%;
 		position: fixed;

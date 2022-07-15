@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { Menu, Close } from '@lib/icons';
 	export let closable = false;
 	const dispatch = createEventDispatcher();
 	const toggleMenu = () => dispatch('togglemenu');
@@ -18,43 +19,9 @@
 
 	<li class="last" on:click={toggleMenu}>
 		{#if closable}
-			<svg
-				width="32"
-				height="32"
-				viewBox="0 0 32 32"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="M25.0748 21.5104L9.98987 6.42547C8.95278 5.38838 7.41482 5.22928 6.57218 6.07191C5.72955 6.91455 5.88865 8.45251 6.92574 9.4896L22.0107 24.5745C23.0478 25.6116 24.5857 25.7707 25.4284 24.9281C26.271 24.0855 26.1119 22.5475 25.0748 21.5104Z"
-					fill="white"
-				/>
-				<path
-					d="M9.98989 24.5745L25.0748 9.4896C26.1119 8.45251 26.271 6.91455 25.4284 6.07191C24.5857 5.22928 23.0478 5.38838 22.0107 6.42547L6.92576 21.5104C5.88867 22.5475 5.72957 24.0855 6.57221 24.9281C7.41484 25.7707 8.9528 25.6116 9.98989 24.5745Z"
-					fill="white"
-				/>
-			</svg>
+			<Close />
 		{:else}
-			<svg
-				width="32"
-				height="32"
-				viewBox="0 0 32 32"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="M5.33325 18.6667L26.6666 18.6667C28.1333 18.6667 29.3333 17.6917 29.3333 16.5C29.3333 15.3083 28.1333 14.3333 26.6666 14.3333L5.33325 14.3333C3.86659 14.3333 2.66659 15.3083 2.66659 16.5C2.66659 17.6917 3.86659 18.6667 5.33325 18.6667Z"
-					fill="white"
-				/>
-				<path
-					d="M26.6666 24.3333L10.6666 24.3333C9.19992 24.3333 7.99992 25.3083 7.99992 26.5C7.99992 27.6917 9.19992 28.6667 10.6666 28.6667L26.6666 28.6667C28.1333 28.6667 29.3333 27.6917 29.3333 26.5C29.3333 25.3083 28.1333 24.3333 26.6666 24.3333Z"
-					fill="white"
-				/>
-				<path
-					d="M10.6666 8.66667L26.6666 8.66667C28.1333 8.66667 29.3333 7.69167 29.3333 6.50001C29.3333 5.30834 28.1333 4.33334 26.6666 4.33334L10.6666 4.33334C9.19992 4.33334 7.99992 5.30834 7.99992 6.5C7.99992 7.69167 9.19992 8.66667 10.6666 8.66667Z"
-					fill="white"
-				/>
-			</svg>
+			<Menu lefted={false} />
 		{/if}
 	</li>
 </ul>
@@ -68,13 +35,19 @@
 	}
 
 	.item {
-		display: flex;
-		align-items: center;
+		display: none;
+		@include breakpoint($md) {
+			display: flex;
+			align-items: center;
+		}
 	}
 
 	.last {
-		cursor: pointer;
-		border-left: 2px solid #ff888f;
-		padding-left: 24px;
+		display: none;
+		@include breakpoint($md) {
+			cursor: pointer;
+			border-left: 2px solid #ff888f;
+			padding-left: 24px;
+		}
 	}
 </style>

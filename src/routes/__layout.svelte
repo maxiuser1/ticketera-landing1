@@ -6,10 +6,10 @@
 
 		return {
 			props: {
-				categories: ['a']
+				categories: ['Conciertos', 'Teatro', 'Deportes', 'Festrivales', 'Arte y Cultura', 'Niños']
 			},
 			stuff: {
-				categories: ['a']
+				categories: ['Conciertos', 'Teatro', 'Deportes', 'Festrivales', 'Arte y Cultura', 'Niños']
 			}
 		};
 	}
@@ -26,9 +26,26 @@
 </main>
 <Footer />
 
-<style>
-	:global(.container) {
-		max-width: 1104px;
-		margin: 0 auto;
+<div class="wrapper">
+	<h1>hola</h1>
+</div>
+
+<style lang="scss">
+	:global {
+		.container {
+			margin: 0 auto;
+			width: 100%;
+			padding-right: 24px;
+			padding-left: 24px;
+
+			@include breakpoint($sm) {
+				padding-left: initial;
+				padding-right: initial;
+				max-width: 704px;
+			}
+			@include breakpoint($md) {
+				max-width: 1104px;
+			}
+		}
 	}
 </style>
