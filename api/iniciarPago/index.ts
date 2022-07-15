@@ -7,23 +7,19 @@ const httpTrigger: AzureFunction = async function (
 	context: Context,
 	req: HttpRequest
 ): Promise<void> {
-	const merchantId = '650213685';
+	const merchantId = process.env['niubiz_merchanid'];
+	const credentials = process.env['niubiz_credentials'];
+	const niubizapi = process.env['niubiz_api'];
+	const niubizlib = process.env['niubiz_lib'];
 
-	const uid: ShortUniqueId = new ShortUniqueId({
-		length: 12
+	const { data: token } = await axios.get(`${niubizapi}/api.security/v1/security`, {
+		headers: {
+			Authorization: credentials
+		}
 	});
 
-	const { data: token } = await axios.get(
-		'https://apiprod.vnforapps.com/api.security/v1/security',
-		{
-			headers: {
-				Authorization: 'Basic cGUuam9zZS5jYWxkZXJvbkBnbWFpbC5jb206Umd4Wi0wU3c='
-			}
-		}
-	);
-
 	const { data: session } = await axios.post(
-		`https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/${merchantId}`,
+		`${niubizapi}/api.ecommerce/v2/ecommerce/token/session/${merchantId}`,
 		{
 			channel: 'web',
 			amount: '10.00',
@@ -63,7 +59,7 @@ const httpTrigger: AzureFunction = async function (
 	};
 
 	context.res = {
-		body: { ...pago, id: newId }
+		body: { ...pago, id: newId, niubizlib }
 	};
 };
 

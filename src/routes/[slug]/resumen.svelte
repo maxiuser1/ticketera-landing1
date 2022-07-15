@@ -77,7 +77,7 @@
 				<form action="compra/{pago.id}" method="post">
 					<script
 						type="text/javascript"
-						src="https://static-content.vnforapps.com/v2/js/checkout.js"
+						src={pago.niubizlib}
 						data-sessiontoken={pago.sessiontoken}
 						data-channel="web"
 						data-merchantid={pago.merchantid}

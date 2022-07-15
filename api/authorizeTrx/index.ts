@@ -6,22 +6,20 @@ const httpTrigger: AzureFunction = async function (
 	req: HttpRequest,
 	turno: any
 ): Promise<void> {
-	context.log(turno);
-	const merchantId = '650213685';
+	const merchantId = process.env['niubiz_merchanid'];
+	const credentials = process.env['niubiz_credentials'];
+	const niubizapi = process.env['niubiz_api'];
+
 	const transaction = req.body;
 	context.log(transaction);
 
-	const { data: token } = await axios.get(
-		'https://apiprod.vnforapps.com/api.security/v1/security',
-		{
-			headers: {
-				Authorization: 'Basic cGUuam9zZS5jYWxkZXJvbkBnbWFpbC5jb206Umd4Wi0wU3c='
-			}
-		}
-	);
+	const { data: token } = await axios.get(`${niubizapi}/api.security/v1/security`, {
+		headers: { Authorization: credentials }
+	});
+
 	try {
 		const resultado = await axios.post(
-			`https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/${merchantId}`,
+			`${niubizapi}/api.authorization/v3/authorization/ecommerce/${merchantId}`,
 			{
 				channel: 'web',
 				captureType: 'manual',
