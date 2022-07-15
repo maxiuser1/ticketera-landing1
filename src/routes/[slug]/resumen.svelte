@@ -50,7 +50,6 @@
 	let sitWidth: number = 30;
 </script>
 
-{JSON.stringify(pago)}
 <Breadcrumbs {event} />
 <Steps />
 <section class="container entrada">
