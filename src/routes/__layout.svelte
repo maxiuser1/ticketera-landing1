@@ -26,10 +26,6 @@
 </main>
 <Footer />
 
-<div class="wrapper">
-	<h1>hola</h1>
-</div>
-
 <style lang="scss">
 	:global {
 		.container {
