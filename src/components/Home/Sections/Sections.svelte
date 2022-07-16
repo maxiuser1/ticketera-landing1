@@ -165,6 +165,17 @@
 		display: flex;
 		flex-direction: column;
 
+		@include breakpoint($md) {
+			flex-direction: row;
+		}
+
+		.resena {
+			@include breakpoint($md) {
+				width: 33%;
+				padding-right: 24px;
+			}
+		}
+
 		.comprar {
 			margin-top: 52px;
 			margin-bottom: 60px;
@@ -174,7 +185,17 @@
 		.imagenes {
 			display: flex;
 			flex-direction: column;
+
 			gap: 24px;
+
+			@include breakpoint($sm) {
+				flex-direction: row;
+				width: 100%;
+			}
+			@include breakpoint($md) {
+				flex-direction: row;
+				width: 66%;
+			}
 		}
 
 		.titulos {
