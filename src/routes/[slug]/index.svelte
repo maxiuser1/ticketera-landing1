@@ -55,6 +55,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>{event.slug}</title>
+</svelte:head>
+
 <section>
 	<div class="banner" style:background-image="url('{event.banner}')">
 		<div class="titulos">

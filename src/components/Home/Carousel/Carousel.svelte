@@ -103,6 +103,10 @@
 			background-position: center center;
 			height: 149px;
 
+			@include breakpoint($sm) {
+				height: 318px;
+			}
+
 			@include breakpoint($md) {
 				height: 440px;
 			}

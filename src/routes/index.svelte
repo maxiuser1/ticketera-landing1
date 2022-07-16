@@ -28,6 +28,10 @@
 	export let eventGallery: EventGallery;
 </script>
 
+<svelte:head>
+	<title>Que Hay!</title>
+</svelte:head>
+
 <Carousel {banners} />
 <SearchBox />
 <Sections {eventGallery} />

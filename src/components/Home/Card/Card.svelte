@@ -39,12 +39,16 @@
 
 <style lang="scss">
 	.card {
-		width: 352px;
+		width: 342px;
 		background: #ffffff;
 		border-width: 0px 1px 1px 1px;
 		border-style: solid;
 		border-color: #bdbdbd;
 		border-radius: 0px 0px 8px 8px;
+
+		@include breakpoint($md) {
+			width: 352px;
+		}
 	}
 
 	.content {

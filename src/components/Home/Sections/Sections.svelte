@@ -4,7 +4,7 @@
 	export let eventGallery: EventGallery;
 </script>
 
-<section>
+<section class="destacados">
 	<div class="container">
 		<a href="/" class="titulo">Destacados</a>
 		<Cards eventos={eventGallery.destacados ?? []} />
@@ -35,13 +35,15 @@
 	<div class="container">
 		<a href="/" class="titulo">Preventas</a>
 
-		<div class="panel container">
+		<div class="panel">
 			<div class="resena">
-				<p>
-					Regístrate con nosotros para conseguir ofertas y descuentos. Loremp Ipsum is simply dummy
-					text of the printing and typesetting industry
-				</p>
-				<button class="comprar">Registrate para conocer más -></button>
+				<div>
+					<p>
+						Regístrate con nosotros para conseguir ofertas y descuentos. Loremp Ipsum is simply
+						dummy text of the printing and typesetting industry
+					</p>
+				</div>
+				<button class="btn-primary comprar">Registrate para conocer más -></button>
 			</div>
 			<div class="imagenes">
 				<div
@@ -77,6 +79,14 @@
 </section>
 
 <style lang="scss">
+	.destacados,
+	.preventas {
+		margin-top: 32px;
+		@include breakpoint($md) {
+			margin-top: 60px;
+		}
+	}
+
 	.botonera {
 		width: 100%;
 		text-align: center;
@@ -93,16 +103,6 @@
 		border-radius: 4px;
 	}
 
-	.comprar {
-		margin-top: 52px;
-		margin-bottom: 60px;
-		padding: 12px 16px;
-		background: linear-gradient(270deg, #ff0036 0%, #d30ed1 100%);
-		border-radius: 4px;
-		border: none;
-		color: white;
-	}
-
 	.preventas {
 		margin-bottom: 80px;
 	}
@@ -115,17 +115,17 @@
 	// 	width: 100%;
 	// 	height: 200px;
 	// }
-	.container {
-		margin-top: 60px;
-	}
 
 	.titulo {
 		text-decoration: none;
 		position: relative;
 		color: var(--pink);
 		font-weight: 700;
-		font-size: 30px;
+		font-size: 24px;
 		line-height: 36px;
+		@include breakpoint($md) {
+			font-size: 30px;
+		}
 	}
 
 	.titulo:before {
@@ -161,43 +161,47 @@
 	}
 
 	.panel {
+		margin-top: 24px;
 		display: flex;
-	}
+		flex-direction: column;
 
-	.resena {
-		width: 40%;
-		padding-right: 20px;
-	}
-
-	.imagenes {
-		display: flex;
-		width: 60%;
-		gap: 24px;
-	}
-
-	.titulos {
-		background-repeat: no-repeat;
-		background-position: 0% 0%;
-		background-size: 100% 100%;
-		width: 33%;
-		height: 148px;
-		display: flex;
-		flex-direction: row;
-		align-items: flex-end;
-
-		color: white;
-		padding-left: 16px;
-		padding-bottom: 12px;
-		h1 {
-			font-weight: 700;
-			font-size: 18px;
-			line-height: 22px;
+		.comprar {
+			margin-top: 52px;
+			margin-bottom: 60px;
+			width: 100%;
 		}
 
-		h2 {
-			font-weight: 400;
-			font-size: 16px;
-			line-height: 19px;
+		.imagenes {
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+		}
+
+		.titulos {
+			background-repeat: no-repeat;
+			background-position: 0% 0%;
+			border-radius: 8px;
+			background-size: 100% 100%;
+			width: 100%;
+			height: 148px;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-end;
+
+			color: white;
+			padding-left: 16px;
+			padding-bottom: 12px;
+			h1 {
+				font-weight: 700;
+				font-size: 18px;
+				line-height: 22px;
+			}
+
+			h2 {
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 19px;
+			}
 		}
 	}
 </style>
