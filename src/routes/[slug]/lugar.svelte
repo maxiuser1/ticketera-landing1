@@ -191,17 +191,12 @@
 
 	export let event: Evento;
 	// let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
-	let filas: Array<Fila> = new Array<Fila>();
+	let filas: Array<Fila> =
+		event.precios?.find((t) => t.tipo == $compraData.zona?.nombre)?.ubicaciones ??
+		new Array<Fila>();
 	const sitWidth = 25;
 	// const filaWidth = (sitWidth + 4) * filas[0].asientos.length;
 	const filaWidth = 100;
-
-	onMount(() => {
-		filas =
-			event.precios?.find((t) => t.tipo == $compraData.zona?.nombre)?.ubicaciones ??
-			new Array<Fila>();
-		console.log('event', filas);
-	});
 
 	function handleClickeado() {
 		alert('test');
