@@ -26,8 +26,7 @@
 					<tr>
 						<th />
 						<th />
-						<th class="general">Precio normal</th>
-						<th class="general">Precio Dscto.</th>
+						<th class="general">Precio</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,7 +40,6 @@
 								</td>
 								<td>{precio.tipo}</td>
 								<td><Soles number={precio.base} /></td>
-								<td><Soles number={precio.descuento} /></td>
 							</tr>
 						{/each}
 					{/if}

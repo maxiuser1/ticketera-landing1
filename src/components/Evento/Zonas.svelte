@@ -21,9 +21,9 @@
 	const continuarClick = () => {
 		compraData.update((current) => ({
 			...current,
-			zona: { nombre: seleccionado }
+			zona: { nombre: seleccionado, tipo: 0 }
 		}));
-
+		console.log('event', event, seleccionado);
 		goto(`../${event.slug}/lugar`);
 	};
 </script>

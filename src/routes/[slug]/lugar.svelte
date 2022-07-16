@@ -5,23 +5,9 @@
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
-		const resp = await fetch(apii + '/api/eventos/mm');
-		const data = await resp.json();
+		const resp = await fetch(apii + '/api/eventos/' + params.slug);
+		const evento = await resp.json();
 
-		let evento: Evento = {
-			slug: 'mm',
-			id: '8a8a98bb-c5e9-4cad-a8c2-9ac59b09dc2c',
-			nombre: 'Tour con Calma',
-			artista: 'Daddy Yankee',
-			lugar: 'Arena Plaza',
-			fechas: ['Jul 16', 'Jul 17'],
-			destacado: true,
-			banner:
-				'https://res.cloudinary.com/maxitech/image/upload/v1656038300/ticketera/banners/d3e78e54-7b56-482c-9e1f-3a109416273a.jpg',
-			categoria: 'Conciertos',
-			precios: [{ tipo: 'General', base: 140, descuento: 120 }],
-			zonas: []
-		};
 		let zona: Zona = { filas: [], took: true };
 
 		const fila1: Fila = {
@@ -185,7 +171,7 @@
 		// 	}
 		// 	zona.filas.push(fila);
 		// }
-		evento.zonas?.push(zona);
+		// evento.zonas?.push(zona);
 
 		return {
 			props: {
@@ -199,15 +185,23 @@
 	import type { Evento, Fila, Zona } from '@models/index';
 
 	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
-
+	import { onMount } from 'svelte';
 	import { Arrow, Box } from '@lib/icons';
+	import { compraData } from '@components/Evento/store';
 
 	export let event: Evento;
-	let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
+	// let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
+	let filas: Array<Fila> = new Array<Fila>();
 	const sitWidth = 25;
 	// const filaWidth = (sitWidth + 4) * filas[0].asientos.length;
 	const filaWidth = 100;
-	console.log('a', sitWidth, 'b', filaWidth);
+
+	onMount(() => {
+		filas =
+			event.precios?.find((t) => t.tipo == $compraData.zona?.nombre)?.ubicaciones ??
+			new Array<Fila>();
+		console.log('event', filas);
+	});
 
 	function handleClickeado() {
 		alert('test');
