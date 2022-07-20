@@ -8,8 +8,10 @@
 
 <ul class="socials">
 	<li class="item">
-		<User />
-		Ingresa
+		<a href="/login">
+			<User />
+			Ingresa
+		</a>
 	</li>
 
 	<li class="last" on:click={toggleMenu}>

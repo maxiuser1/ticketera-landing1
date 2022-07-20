@@ -17,7 +17,16 @@
 
 <script lang="ts">
 	import { Header, Footer } from '@components/Layout';
+	import { user, isLoggedIn } from '../stores/userstore';
+	import { auth } from '../firebase';
+	import { signOut, onAuthStateChanged } from 'firebase/auth';
+
 	export let categories: Array<String>;
+
+	onAuthStateChanged(auth, (authUser) => {
+		$user = authUser;
+		$isLoggedIn = !!authUser;
+	});
 </script>
 
 <Header {categories} />
