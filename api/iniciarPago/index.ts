@@ -22,7 +22,7 @@ const httpTrigger: AzureFunction = async function (
 		`${niubizapi}/api.ecommerce/v2/ecommerce/token/session/${merchantId}`,
 		{
 			channel: 'web',
-			amount: '10.00',
+			amount: '1.00',
 			antifraud: {
 				clientIp: '38.25.15.249',
 				merchantDefineData: {
@@ -48,7 +48,7 @@ const httpTrigger: AzureFunction = async function (
 		sessiontoken: session.sessionKey,
 		merchantid: merchantId,
 		purchasenumber: Math.floor(new Date().getTime() / 10),
-		amount: 10.0
+		amount: 1.0
 	};
 
 	context.bindings.turno = {

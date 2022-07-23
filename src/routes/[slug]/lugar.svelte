@@ -186,7 +186,7 @@
 
 	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
 	import { onMount } from 'svelte';
-	import { Arrow, Box } from '@lib/icons';
+	import { Arrow, Box } from '@utils/icons';
 	import { compraData } from '@components/Evento/store';
 
 	export let event: Evento;

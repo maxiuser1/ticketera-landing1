@@ -42,11 +42,10 @@
 	<title>{event.slug}</title>
 </svelte:head>
 
-<section>
-	<div class="banner" style:background-image="url('{event.banner}')">
+<section class="banner" style:background-image="url('{event.banner}')">
+	<div class="content-banner">
 		<div class="titulos">
-			<h1>{event.artista}</h1>
-			<h2>{event.nombre}</h2>
+			<h2>{event.artista}</h2>
 		</div>
 	</div>
 </section>
@@ -70,29 +69,52 @@
 		border: none;
 		color: white;
 	}
+	.content-banner {
+		width: 100%;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+	}
 	.banner {
 		background-size: 100% 100%; /* <------ */
 		background-repeat: no-repeat;
 		background-position: center center;
-		height: 440px;
+		height: 160px;
 
 		display: flex;
 		align-items: flex-end;
 
+		@include breakpoint($md) {
+			height: 440px;
+		}
+
 		.titulos {
-			padding: 0 0 32px 88px;
+			padding: 0 0 10px 24px;
+
 			color: #ffffff;
+
+			@include breakpoint($md) {
+				padding: 0 0 32px 88px;
+			}
 
 			h1 {
 				font-weight: 700;
-				font-size: 42px;
-				line-height: 50px;
+				font-size: 32px;
+				line-height: 38px;
+
+				@include breakpoint($md) {
+					font-size: 42px;
+					line-height: 50px;
+				}
 			}
 
 			h2 {
 				font-weight: 400;
-				font-size: 32px;
-				line-height: 38px;
+				font-size: 24px;
+				line-height: 29px;
+
+				@include breakpoint($md) {
+					font-size: 32px;
+					line-height: 38px;
+				}
 			}
 		}
 	}

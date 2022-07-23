@@ -34,8 +34,6 @@
 			<iframe
 				title="test"
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3956287838505!2d-76.9846301084894!3d-12.085045418600219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7e5a9b512cf%3A0x7b2988869e2c48c2!2sArena%20Per%C3%BA!5e0!3m2!1sen!2spe!4v1655379769860!5m2!1sen!2spe"
-				width="446"
-				height="258"
 				style="border:0;"
 				loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"
@@ -50,8 +48,26 @@
 		justify-content: space-between;
 		margin-top: 80px;
 
+		flex-direction: column;
+		gap: 20px;
+		@include breakpoint($md) {
+			flex-direction: row;
+		}
+
 		.map {
-			max-width: 446px;
+			width: 312px;
+
+			@include breakpoint($md) {
+				width: 446px;
+			}
+
+			iframe {
+				width: 312px;
+				height: 258;
+				@include breakpoint($md) {
+					width: 446px;
+				}
+			}
 		}
 
 		h1 {

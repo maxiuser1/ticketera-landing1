@@ -19,7 +19,8 @@ const config = {
 			resolve: {
 				alias: {
 					'@components': path.resolve('./src/components'),
-					'@lib': path.resolve('./src/lib'),
+					'@utils': path.resolve('./src/utils'),
+					'@validations':path.resolve('./src/validations'),
 					'@application': path.resolve('./src/application'),
 					'@models': path.resolve('./api/models')
 				}
@@ -27,5 +28,5 @@ const config = {
 		}
 	}
 };
-
+	
 export default config;

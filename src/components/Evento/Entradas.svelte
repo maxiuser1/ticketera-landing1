@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Radio } from '@lib/icons';
-	import { Soles } from '@lib/formats';
+	import { Radio } from '@utils/icons';
+	import { Soles } from '@utils/formats';
 
 	import type { Evento } from '@models/index';
 

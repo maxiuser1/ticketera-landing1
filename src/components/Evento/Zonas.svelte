@@ -1,6 +1,6 @@
 <script type="ts">
 	import type { Compra, Evento } from '@models/index';
-	import { Checked, Arrow } from '@lib/icons';
+	import { Checked, Arrow } from '@utils/icons';
 	import { compraData } from './store';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -53,7 +53,7 @@
 						>
 					</svg>
 				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
+				<div class="zona" data-tooltip="S/ 1.00 - S/ 1.00">
 					<svg width="60%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect
 							width="100%"
@@ -75,7 +75,7 @@
 						>
 					</svg>
 				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
+				<div class="zona" data-tooltip="S/ 1.00 - S/ 1.00">
 					<svg width="80%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect
 							width="100%"
@@ -95,7 +95,7 @@
 						>
 					</svg>
 				</div>
-				<div class="zona" data-tooltip="S/ 350.00 - S/ 480.00">
+				<div class="zona" data-tooltip="S/ 1.00 - S/ 1.00">
 					<svg width="100%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect
 							width="100%"

@@ -2,13 +2,13 @@
 	import { slide } from 'svelte/transition';
 	import Logo from './Logo.svelte';
 	import Socials from './Socials';
-	import { Menu, User } from '@lib/icons';
+	import { Menu, User } from '@utils/icons';
 	import Nav from './Nav';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
 	import { apii } from '@components/Layout';
 
-	export let categories;
+	export let categories = [];
 
 	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
 

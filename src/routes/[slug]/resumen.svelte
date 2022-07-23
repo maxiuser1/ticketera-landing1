@@ -43,7 +43,7 @@
 
 	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
 
-	import { Arrow, Box } from '@lib/icons';
+	import { Arrow, Box } from '@utils/icons';
 
 	export let event: Evento;
 	export let pago: any;
@@ -68,7 +68,7 @@
 							<h5>Sillas</h5>
 						</div>
 					</div>
-					<div>S/ 480.00</div>
+					<div>S/ 1.00</div>
 				</div>
 			</div>
 
