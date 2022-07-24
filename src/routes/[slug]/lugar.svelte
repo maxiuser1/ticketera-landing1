@@ -175,7 +175,7 @@
 
 		return {
 			props: {
-				event: evento
+				evento: evento
 			}
 		};
 	};
@@ -189,11 +189,9 @@
 	import { Arrow, Box } from '@utils/icons';
 	import { compraData } from '@components/Evento/store';
 
-	export let event: Evento;
-	// let filas: Array<Fila> = event.zonas?.find((t) => t.took)?.filas ?? new Array<Fila>();
+	export let evento: Evento;
 	let filas: Array<Fila> =
-		event.precios?.find((t) => t.tipo == $compraData.zona?.nombre)?.ubicaciones ??
-		new Array<Fila>();
+		evento.precios?.find((t) => t.tipo == $compraData.zona?.tipo)?.ubicaciones ?? new Array<Fila>();
 	const sitWidth = 25;
 	// const filaWidth = (sitWidth + 4) * filas[0].asientos.length;
 	const filaWidth = 100;
@@ -203,7 +201,7 @@
 	}
 </script>
 
-<Breadcrumbs {event} />
+<Breadcrumbs {evento} />
 <Steps />
 
 <section class="container entrada">
@@ -236,7 +234,7 @@
 				</div>
 			</div>
 			<div class="cta">
-				<a href="../{event.slug}/resumen" class="comprar"
+				<a href="../{evento.slug}/resumen" class="comprar"
 					>Continuar ({filas.reduce(
 						(count, current) => count + current.asientos.filter((t) => t.s == 1).length,
 						0
@@ -247,12 +245,12 @@
 		<div class="summary">
 			<div class="headings">
 				<h2>Detalle</h2>
-				<h1>{event.artista}</h1>
-				<h3>{event.nombre}</h3>
+				<h1>{evento.artista}</h1>
+				<h3>{evento.nombre}</h3>
 			</div>
 
-			<h4>{event.fechas?.map((t) => t)}</h4>
-			<h5>{event.lugar}</h5>
+			<h4>{evento.fechas?.map((t) => t)}</h4>
+			<h5>{evento.lugar}</h5>
 		</div>
 	</div>
 </section>

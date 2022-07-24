@@ -1,5 +1,5 @@
 import type { SvelteComponent } from 'svelte';
-import Tooltip from './Popover.svelte';
+import Popover from './Popover.svelte';
 import type { TooltipConifg } from '../Tooltip/types';
 
 const defaultConfig: TooltipConifg = {
@@ -22,7 +22,7 @@ export const popover = (node: any, props: TooltipConifg) => {
 		const style = props?.style ?? defaultConfig.style;
 		const effect = props?.effect ?? defaultConfig.effect;
 
-		tooltipComp = new Tooltip({
+		tooltipComp = new Popover({
 			props: {
 				mouseX: event.pageX,
 				mouseY: event.pageY,

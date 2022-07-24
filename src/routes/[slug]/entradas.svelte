@@ -5,12 +5,12 @@
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
-		const resp = await fetch(apii + '/api/eventos/' + params.slug);
+		const resp = await fetch(apii + '/api/eventos/' + params.slug + '/locacion');
 		const data = await resp.json();
-
+		console.log('data', data);
 		return {
 			props: {
-				event: data
+				evento: data
 			}
 		};
 	};
@@ -20,9 +20,9 @@
 	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
 	import type { Evento } from '@models/index';
 
-	export let event: Evento;
+	export let evento: Evento;
 </script>
 
-<Breadcrumbs {event} />
+<Breadcrumbs {evento} />
 <Steps />
-<Zonas {event} />
+<Zonas {evento} />

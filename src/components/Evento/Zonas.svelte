@@ -4,9 +4,9 @@
 	import { compraData } from './store';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { current_component } from 'svelte/internal';
+	import { zonas } from './zonas';
 
-	export let event: Evento;
+	export let evento: Evento;
 	let selectedStyle = "url('#myGradient')";
 	let seleccionado = '';
 
@@ -14,17 +14,18 @@
 		if ($compraData.zona?.nombre) seleccionado = $compraData.zona.nombre;
 	});
 
-	const seleccionar = (zona: string) => {
-		seleccionado = zona;
-	};
-
-	const continuarClick = () => {
+	const seleccionar = (zoneado: any) => {
+		const zonaSeleccionada = zoneado.detail;
 		compraData.update((current) => ({
 			...current,
-			zona: { nombre: seleccionado, tipo: 0 }
+			zona: {
+				tipo: zonaSeleccionada.tipo,
+				base: zonaSeleccionada.base
+			}
 		}));
-		console.log('event', event, seleccionado);
-		goto(`../${event.slug}/lugar`);
+
+		if (zonaSeleccionada.numerada) goto(`../${evento.slug}/lugar`);
+		else goto(`../${evento.slug}/lugar`);
 	};
 </script>
 
@@ -33,104 +34,19 @@
 		<div class="main">
 			<h2>Entradas</h2>
 			<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
-			<div class="mapa">
-				<div style="margin:20px">
-					<svg
-						class="escenario"
-						width="100%"
-						height="52"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<rect width="100%" height="120" rx="4" fill="#FFDADB" />
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#FF888F">Escenario</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 1.00 - S/ 1.00">
-					<svg width="60%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect
-							width="100%"
-							height="120"
-							rx="4"
-							on:click={() => seleccionar('Box')}
-							fill={seleccionado == 'Box' ? selectedStyle : '#FC13FA'}
-						/>
-						{#if seleccionado == 'Box'} <Checked /> {/if}
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff"
-						>
-							Box</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 1.00 - S/ 1.00">
-					<svg width="80%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect
-							width="100%"
-							height="120"
-							rx="4"
-							on:click={() => seleccionar('VIP')}
-							fill={seleccionado == 'VIP' ? selectedStyle : '#FE75FC'}
-						/>
-						{#if seleccionado == 'VIP'} <Checked /> {/if}
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff">VIP</text
-						>
-					</svg>
-				</div>
-				<div class="zona" data-tooltip="S/ 1.00 - S/ 1.00">
-					<svg width="100%" height="120" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect
-							width="100%"
-							height="120"
-							rx="4"
-							on:click={() => seleccionar('General')}
-							fill={seleccionado == 'General' ? selectedStyle : '#FFD6FE'}
-						/>
-						{#if seleccionado == 'General'} <Checked /> {/if}
-						<text
-							x="50%"
-							y="50%"
-							font-size="24"
-							dominant-baseline="middle"
-							text-anchor="middle"
-							fill="#ffffff">General</text
-						>
-					</svg>
-				</div>
-			</div>
-			<div class="cta">
-				<!-- <a href="../{event.slug}/lugar" class="comprar">Continuar <Arrow /></a> -->
-
-				<button on:click={continuarClick} class="comprar">Continuar <Arrow /> </button>
+			<div class="mapa" use:zonas={evento.precios} on:zonned={seleccionar}>
+				{@html evento.locacion}
 			</div>
 		</div>
 		<div class="summary">
 			<div class="headings">
 				<h2>Detalle</h2>
-				<h1>{event.artista}</h1>
-				<h3>{event.nombre}</h3>
+				<h1>{evento.artista}</h1>
+				<h3>{evento.nombre}</h3>
 			</div>
 
-			<h4>{event.fechas?.map((t) => t)}</h4>
-			<h5>{event.lugar}</h5>
+			<h4>{evento.fechas?.map((t) => t)}</h4>
+			<h5>{evento.lugar}</h5>
 		</div>
 	</div>
 </section>

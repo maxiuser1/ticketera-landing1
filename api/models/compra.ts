@@ -7,6 +7,6 @@ export type Compra = {
 	zona?: {
 		nombre?: string;
 		precio?: number;
-		tipo: number;
+		tipo?: string;
 	};
 };

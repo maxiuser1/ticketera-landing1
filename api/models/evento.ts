@@ -12,4 +12,6 @@ export type Evento = {
 	zonas?: Zona[];
 	destacado?: boolean;
 	categoria?: string;
+	mapa?: string;
+	locacion?: string;
 };

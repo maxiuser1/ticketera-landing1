@@ -14,7 +14,7 @@
 		right: { xAxis: 0, yAxis: -50, top: 0, left: offset.offsetLeft }
 	};
 
-	const { xAxis: floatXAxis, yAxis: floatYAxis, top, left } = floatPlaceMap.bottom;
+	const { xAxis: floatXAxis, yAxis: floatYAxis, top, left } = floatPlaceMap.top;
 	// TODO: Add Effect: Solid
 </script>
 

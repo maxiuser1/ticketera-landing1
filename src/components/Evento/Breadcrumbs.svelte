@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { Evento } from '@models/evento';
 
-	export let event: Evento;
+	export let evento: Evento;
 </script>
 
 <section class="breacrumbs">
 	<div class="container">
 		<ul>
 			<li>
-				<a href="/{event.slug}">
+				<a href="/{evento.slug}">
 					<svg
 						width="16"
 						height="16"
@@ -21,8 +21,8 @@
 				</a>
 			</li>
 			<li class="selected">
-				<a href="/{event.slug}">
-					{event.artista}
+				<a href="/{evento.slug}">
+					{evento.artista}
 				</a>
 			</li>
 			<li>></li>

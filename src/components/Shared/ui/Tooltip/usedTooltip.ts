@@ -11,7 +11,7 @@ const defaultConfig: TooltipConifg = {
 	style: ''
 };
 
-export const tooltip = (node: any, props: TooltipConifg) => {
+export const usedTooltip = (node: any, props: TooltipConifg) => {
 	let tooltipComp: SvelteComponent;
 
 	const handleMouseOver = (event: MouseEvent) => {
