@@ -1,18 +1,10 @@
 <script type="ts">
-	import type { Compra, Evento } from '@models/index';
-	import { Checked, Arrow } from '@utils/icons';
+	import type { Evento } from '@models/index';
 	import { compraData } from './store';
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { zonas } from './zonas';
 
 	export let evento: Evento;
-	let selectedStyle = "url('#myGradient')";
-	let seleccionado = '';
-
-	onMount(async () => {
-		if ($compraData.zona?.nombre) seleccionado = $compraData.zona.nombre;
-	});
 
 	const seleccionar = (zoneado: any) => {
 		const zonaSeleccionada = zoneado.detail;
@@ -50,15 +42,6 @@
 		</div>
 	</div>
 </section>
-
-<svg>
-	<defs>
-		<linearGradient id="myGradient" gradientTransform="rotate(30)">
-			<stop offset="0%" stop-color="#D30ED1" />
-			<stop offset="100%" stop-color="#FF0036" />
-		</linearGradient>
-	</defs>
-</svg>
 
 <style lang="scss">
 	.cta {

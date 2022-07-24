@@ -1,4 +1,3 @@
-import { update } from 'lodash';
 import { Tooltip } from '@components/Shared/ui/Tooltip';
 import type { SvelteComponent } from 'svelte';
 
@@ -10,6 +9,7 @@ export const zonas = (node: any, props: any) => {
 				const prevcolor = each.getAttribute('fill');
 
 				each.addEventListener('click', () => {
+					tooltipComp.$destroy();
 					const zonned = new CustomEvent('zonned', {
 						detail: {
 							tipo: cadaPrecio.tipo,
@@ -27,7 +27,7 @@ export const zonas = (node: any, props: any) => {
 							mouseX: event.pageX,
 							mouseY: event.pageY,
 							config: {
-								body: `S/ ${cadaPrecio.base}`,
+								body: `${cadaPrecio.tipo}: S/ ${cadaPrecio.base}`,
 								bodyAsHTML: false,
 								place: 'top',
 								effect: 'solid',

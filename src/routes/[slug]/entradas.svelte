@@ -19,10 +19,16 @@
 <script lang="ts">
 	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
 	import type { Evento } from '@models/index';
+	import { navigating } from '$app/stores';
+	import { loading } from '@components/Shared/loading/loading';
+	import Loading from '@components/Shared/loading/Loading.svelte';
+
+	$: loading.setNavigate(!!$navigating);
 
 	export let evento: Evento;
 </script>
 
+<Loading />
 <Breadcrumbs {evento} />
 <Steps />
 <Zonas {evento} />

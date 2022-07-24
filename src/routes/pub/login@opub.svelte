@@ -47,10 +47,10 @@
 	};
 </script>
 
+<Loading />
+
 <div class="form">
 	<a href="/login" class="titulo">Bienvenido</a>
-
-	<Loading />
 
 	<LoginForm
 		{loginVm}
@@ -92,7 +92,7 @@
 			line-height: 24px;
 		}
 	}
-	
+
 	.titulo {
 		color: #d30ed1;
 		font-weight: 700;
