@@ -3,11 +3,13 @@
 	import { compraData } from './store';
 	import { goto } from '$app/navigation';
 	import { zonas } from './zonas';
-
+	import { loading } from '@components/Shared/loading/loading';
+	import Loading from '@components/Shared/loading/Loading.svelte';
+	import { navigating } from '$app/stores';
+	$: loading.setNavigate(!!$navigating);
 	export let evento: Evento;
 
-	const seleccionar = (zoneado: any) => {
-		const zonaSeleccionada = zoneado.detail;
+	const seleccionar = (zonaSeleccionada: any) => {
 		compraData.update((current) => ({
 			...current,
 			zona: {
@@ -21,12 +23,21 @@
 	};
 </script>
 
+<Loading />
+
 <section class="container entrada">
 	<div class="grid">
 		<div class="main">
 			<h2>Entradas</h2>
 			<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
-			<div class="mapa" use:zonas={evento.precios} on:zonned={seleccionar}>
+			<div
+				class="mapa"
+				use:zonas={evento.precios}
+				on:zonned={({ detail }) => {
+					loading.setLoading(true, '');
+					seleccionar(detail);
+				}}
+			>
 				{@html evento.locacion}
 			</div>
 		</div>
