@@ -3,6 +3,7 @@
 	import Logo from './Logo.svelte';
 	import Socials from './Socials';
 	import { Menu, User } from '@utils/icons';
+	import { user, isLoggedIn } from '../../../stores/userstore';
 	import Nav from './Nav';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
@@ -30,7 +31,13 @@
 	<header class="categories" transition:animate>
 		<nav class="container">
 			<ul class="ingresa">
-				<li><User /> Ingresa</li>
+				<li>
+					{#if $isLoggedIn}
+						<User /> <a class="anchormenu" href="./pub/logout">Salir</a>
+					{:else}
+						<User /> <a class="anchormenu" href="/pub/login"> Ingresa</a>
+					{/if}
+				</li>
 			</ul>
 			<ul class="menu">
 				{#each categories as category}
@@ -42,6 +49,9 @@
 {/if}
 
 <style lang="scss">
+	.anchormenu {
+		color: #fff;
+	}
 	.navbar-toggle {
 		border: none;
 		background-color: rgba(0, 0, 0, 0);

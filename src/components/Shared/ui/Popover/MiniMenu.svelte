@@ -11,9 +11,6 @@
 <div class="menu">
 	<ul>
 		<li>
-			<a href="https://www.google.com"> Perfil </a>
-		</li>
-		<li>
 			<a href="./pub/logout"> Salir </a>
 		</li>
 	</ul>

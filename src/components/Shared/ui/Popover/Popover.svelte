@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition';
 	import type { TooltipConifg } from '../Tooltip/types';
 	import MiniMenu from './MiniMenu.svelte';
 	export let mouseX: number;
 	export let mouseY: number;
 	export let config: TooltipConifg;
+	const animate = (node, args) => (args.cond ? slide(node, args) : slide(node, args));
 
 	const { type, place, body, bodyAsHTML, style } = config;
 	const offset = { offsetTop: 15, offsetLeft: 15 };
@@ -24,6 +26,7 @@
 		mouseX + left
 	}px; transform: translate(${floatXAxis}%, ${floatYAxis}%); ${style}`}
 	class="svelte-tooltip {type} {place}"
+	transition:animate
 >
 	{#if body == 'MiniMenu'}
 		<MiniMenu />
@@ -36,7 +39,7 @@
 
 <style>
 	.svelte-tooltip {
-		--main-bg-color: rgba(20, 19, 24, 0.9);
+		--main-bg-color: #5b025a;
 		--success-bg-color: rgba(40, 167, 70, 0.9);
 		--error-bg-color: rgba(220, 52, 70, 0.9);
 		--warning-bg-color: rgba(252, 200, 34, 0.9);
