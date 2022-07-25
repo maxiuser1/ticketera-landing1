@@ -1,7 +1,6 @@
 <script lang="ts" context="module">
 	import { apii } from '@components/Layout';
 	import type { Load } from '@sveltejs/kit';
-	import { Steps } from '@components/Evento';
 	type Params = { slug: string };
 
 	export const load: Load<Params> = async ({ params, fetch }) => {
@@ -16,11 +15,12 @@
 </script>
 
 <script lang="ts">
-	import type { Evento, Fila, Zona } from '@models/index';
-
-	import Breadcrumbs from '@components/Evento/Breadcrumbs.svelte';
+	import type { Asiento, Evento, Fila, Zona } from '@models/index';
+	import { Steps, Breadcrumbs } from '@components/Evento';
 	import { Arrow, Box } from '@utils/icons';
 	import { compraData } from '@components/Evento/store';
+	import { goto } from '$app/navigation';
+	import type { Sentado } from '@models/Asiento';
 
 	export let evento: Evento;
 	let filas: Array<Fila> =
@@ -29,13 +29,35 @@
 	// const filaWidth = (sitWidth + 4) * filas[0].asientos.length;
 	const filaWidth = 100;
 
-	function handleClickeado() {
-		alert('test');
-	}
+	const continuarClick = () => {
+		let asientos: Array<Sentado> = new Array<Sentado>();
+
+		filas.forEach((fila) => {
+			fila.asientos.forEach((a) => {
+				if (a.s == 1) {
+					asientos.push({
+						tipo: $compraData.zona?.tipo,
+						base: $compraData.zona?.base,
+						numerado: $compraData.zona?.numerado,
+						fila: fila.id,
+						asiento: a.id,
+						cantidad: 1
+					});
+				}
+			});
+		});
+
+		compraData.update((current) => ({
+			...current,
+			entradas: asientos
+		}));
+
+		goto(`../${evento.slug}/reserva`);
+	};
 </script>
 
 <Breadcrumbs {evento} />
-<Steps />
+<Steps paso="lugar" />
 
 <section class="container entrada">
 	<div class="grid">
@@ -67,12 +89,12 @@
 				</div>
 			</div>
 			<div class="cta">
-				<a href="../{evento.slug}/resumen" class="comprar"
+				<button on:click={continuarClick} class="btn"
 					>Continuar ({filas.reduce(
 						(count, current) => count + current.asientos.filter((t) => t.s == 1).length,
 						0
-					)}) <Arrow /></a
-				>
+					)}) <Arrow />
+				</button>
 			</div>
 		</div>
 		<div class="summary">
@@ -105,12 +127,8 @@
 		text-align: center;
 		margin-top: 52px;
 		margin-bottom: 60px;
-		.comprar {
+		.btn {
 			padding: 12px 16px;
-			background: linear-gradient(270deg, #ff0036 0%, #d30ed1 100%);
-			border-radius: 4px;
-			border: none;
-			color: white;
 		}
 	}
 	.entrada {

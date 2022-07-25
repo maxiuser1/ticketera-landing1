@@ -35,7 +35,6 @@
 	// };
 
 	const onValid = async (login: LoginSubmitDetails) => {
-		console.log('login', login);
 		const res = await signInWithEmailAndPassword(
 			auth,
 			login.loginVm.username,

@@ -7,7 +7,6 @@
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const resp = await fetch(apii + '/api/eventos/' + params.slug);
 		const data = await resp.json();
-		console.log('data', data);
 		const slug = params.slug;
 
 		return {

@@ -40,6 +40,10 @@ export const zonas = (node: any, props: any) => {
 					each.setAttribute('fill', '#FF0036');
 				});
 
+				each.addEventListener('mousemove', (event: MouseEvent) => {
+					tooltipComp.$set({ mouseX: event.pageX, mouseY: event.pageY });
+				});
+
 				each.addEventListener('mouseleave', () => {
 					tooltipComp.$destroy();
 					each.setAttribute('fill', prevcolor);

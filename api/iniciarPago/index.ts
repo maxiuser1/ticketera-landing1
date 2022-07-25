@@ -1,16 +1,34 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
-import ShortUniqueId, { DEFAULT_UUID_LENGTH } from '../services/shortuuid';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { Compra, Evento } from '../models';
+import { database } from '../services/helpers/db';
 
 const httpTrigger: AzureFunction = async function (
 	context: Context,
-	req: HttpRequest
+	req: HttpRequest,
+	evento: Evento
 ): Promise<void> {
 	const merchantId = process.env['niubiz_merchanid'];
 	const credentials = process.env['niubiz_credentials'];
 	const niubizapi = process.env['niubiz_api'];
 	const niubizlib = process.env['niubiz_lib'];
+
+	const intencion = req.body.payload as Compra;
+
+	let precioReal: number = 0;
+
+	for (let entrada of intencion.entradas) {
+		const entradaDb = evento.precios.find((t) => t.tipo == entrada.tipo);
+		if (entradaDb && entrada.base && entrada.cantidad) {
+			const precio = Number(entradaDb.base) * entrada.cantidad;
+			precioReal += precio;
+		}
+	}
+
+	context.log('--precio', precioReal);
+
+	// const precioDb = evento.precios.find(t => t.tipo == intencion.zona.tipo);
 
 	const { data: token } = await axios.get(`${niubizapi}/api.security/v1/security`, {
 		headers: {
@@ -22,7 +40,7 @@ const httpTrigger: AzureFunction = async function (
 		`${niubizapi}/api.ecommerce/v2/ecommerce/token/session/${merchantId}`,
 		{
 			channel: 'web',
-			amount: '1.00',
+			amount: precioReal,
 			antifraud: {
 				clientIp: '38.25.15.249',
 				merchantDefineData: {
@@ -48,14 +66,15 @@ const httpTrigger: AzureFunction = async function (
 		sessiontoken: session.sessionKey,
 		merchantid: merchantId,
 		purchasenumber: Math.floor(new Date().getTime() / 10),
-		amount: 1.0
+		amount: precioReal
 	};
 
 	context.bindings.turno = {
 		tenant: 'quehay',
 		id: newId,
 		compra: pago.purchasenumber,
-		evento: req.body.evento
+		monto: precioReal,
+		info: intencion
 	};
 
 	context.res = {

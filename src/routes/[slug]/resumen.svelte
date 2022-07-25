@@ -1,11 +1,12 @@
 <script lang="ts" context="module">
 	export const hydrate = false;
+	import { compraData } from '@components/Evento/store';
+	import { get } from 'svelte/store';
 	import { apii } from '@components/Layout';
 	import type { Load } from '@sveltejs/kit';
 	import { Steps } from '@components/Evento';
-	type Params = { slug: string };
 
-	export const load: Load<Params> = async ({ params, fetch }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const pagores = await fetch(apii + '/api/miturno', {
 			method: 'PATCH',
 			body: JSON.stringify({
@@ -25,13 +26,13 @@
 			banner:
 				'https://res.cloudinary.com/maxitech/image/upload/v1656038300/ticketera/banners/d3e78e54-7b56-482c-9e1f-3a109416273a.jpg',
 			categoria: 'Conciertos',
-			precios: [{ tipo: 'General', base: 140, descuento: 120 }],
+			precios: [],
 			zonas: []
 		};
 
 		return {
 			props: {
-				event: evento,
+				evento,
 				pago: datapago
 			}
 		};
@@ -45,12 +46,12 @@
 
 	import { Arrow, Box } from '@utils/icons';
 
-	export let event: Evento;
+	export let evento: Evento;
 	export let pago: any;
 	let sitWidth: number = 30;
 </script>
 
-<Breadcrumbs {event} />
+<Breadcrumbs {evento} />
 <Steps />
 <section class="container entrada">
 	<div class="grid">
@@ -92,12 +93,12 @@
 		<div class="summary">
 			<div class="headings">
 				<h2>Detalle</h2>
-				<h1>{event.artista}</h1>
-				<h3>{event.nombre}</h3>
+				<h1>{evento.artista}</h1>
+				<h3>{evento.nombre}</h3>
 			</div>
 
-			<h4>{event.fechas?.map((t) => t)}</h4>
-			<h5>{event.lugar}</h5>
+			<h4>{evento.fechas?.map((t) => t)}</h4>
+			<h5>{evento.lugar}</h5>
 		</div>
 	</div>
 </section>

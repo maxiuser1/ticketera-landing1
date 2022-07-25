@@ -27,7 +27,7 @@ const httpTrigger: AzureFunction = async function (
 				order: {
 					tokenId: transaction.transactionToken,
 					purchaseNumber: turno.compra,
-					amount: 1.0,
+					amount: turno.monto,
 					currency: 'PEN'
 				}
 			},

@@ -4,3 +4,5 @@ export { default as Artistas } from './Artistas.svelte';
 export { default as Zonas } from './Zonas.svelte';
 export { default as Breadcrumbs } from './Breadcrumbs.svelte';
 export { default as Steps } from './Steps.svelte';
+export { default as Step } from './Step.svelte';
+export { default as Counter } from './Counter.svelte';

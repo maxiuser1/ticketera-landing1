@@ -5,7 +5,6 @@ const httpTrigger: AzureFunction = async function (
 	req: HttpRequest,
 	item: any
 ): Promise<void> {
-	context.log('item', item);
 	const container = await database().container('locaciones');
 	const querySpec = `SELECT * from c where c.locacion = '${item[0].locacion}'`;
 

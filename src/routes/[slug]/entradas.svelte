@@ -7,7 +7,6 @@
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const resp = await fetch(apii + '/api/eventos/' + params.slug + '/locacion');
 		const data = await resp.json();
-		console.log('data', data);
 		return {
 			props: {
 				evento: data
@@ -23,5 +22,5 @@
 </script>
 
 <Breadcrumbs {evento} />
-<Steps />
+<Steps paso="entrada" />
 <Zonas {evento} />

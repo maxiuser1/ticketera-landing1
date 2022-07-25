@@ -8,12 +8,22 @@
       "methods": [
         "patch"
       ],
-      "route":"miturno"
+      "route":"miturno/{eid}"
     },
     {
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "evento",
+      "databaseName": "quehaydb",
+      "collectionName": "eventos",
+      "connectionStringSetting": "CosmosDBConnection",
+      "id":"{eid}",
+      "PartitionKey":"quehay"
     },
     {
       "type": "cosmosDB",

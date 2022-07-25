@@ -6,3 +6,5 @@ export { default as Menu } from './Menu.svelte';
 export { default as Close } from './Close.svelte';
 export { default as User } from './User.svelte';
 export { default as Google } from './Google.svelte';
+export { default as Ticket } from './Ticket.svelte';
+export { default as Tarjeta } from './Tarjeta.svelte';

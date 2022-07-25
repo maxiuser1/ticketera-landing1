@@ -1,88 +1,55 @@
+<script type="ts">
+	import Step from './Step.svelte';
+	import { compraData } from './store';
+
+	export let paso: string;
+</script>
+
 <section class="container wizard">
+	<div class="mpasos">
+		{#if paso == 'entrada'}
+			<Step numero="1" titulo="Entrada" subtitulo="Elige el tipo de entrada" seleccionado={true} />
+			<Step numero="2" titulo="" subtitulo="" seleccionado={false} />
+		{:else if paso == 'resumen'}
+			<Step numero="4" titulo="Resumen" subtitulo="Lugar reservado" seleccionado={true} />
+		{/if}
+	</div>
+
 	<div class="pasos">
-		<div class="paso seleccionado">
-			<div class="numero">1</div>
-			<div>
-				<h1>Entrada</h1>
-				<h2>Elige el tipo de entrada</h2>
-			</div>
-		</div>
-		<div class="paso">
-			<div class="numero">2</div>
-			<div>
-				<h1>Lugar</h1>
-				<h2>¿Vas solo o acompañado?</h2>
-			</div>
-		</div>
-		<div class="paso">
-			<div class="numero">3</div>
-			<div>
-				<h1>Acompañamiento</h1>
-				<h2>¿Se te antoja algo?</h2>
-			</div>
-		</div>
-		<div class="paso">
-			<div class="numero">4</div>
-			<div>
-				<h1>Resumen</h1>
-				<h2>Estas a un paso</h2>
-			</div>
-		</div>
+		<Step
+			numero="1"
+			titulo="Entrada"
+			subtitulo={$compraData.zona?.tipo ?? 'Elige el tipo de entrada'}
+			seleccionado={true}
+		/>
+
+		<Step numero="2" titulo="Lugar" subtitulo="¿Vas solo o acompañado?" seleccionado={false} />
+		<Step numero="3" titulo="Acompañamiento" subtitulo="¿Se te antoja algo?" seleccionado={false} />
+
+		<Step numero="4" titulo="Resumen" subtitulo="Estas a un paso" seleccionado={false} />
 	</div>
 </section>
 
 <style lang="scss">
 	.wizard {
+		.mpasos {
+			margin: 40px 0px;
+			display: flex;
+			justify-content: space-between;
+			@include breakpoint($md) {
+				display: none;
+			}
+		}
+
 		.pasos {
 			margin: 72px 0px;
-			display: flex;
+			display: none;
 			width: 100%;
 			gap: 24px;
 			justify-content: space-between;
 
-			.paso {
-				.numero {
-					color: white;
-					display: flex;
-					font-weight: 900;
-					font-size: 24px;
-					line-height: 29px;
-					align-items: center;
-					justify-content: center;
-					width: 54px;
-					border-radius: 50%;
-					background-color: #e2e2e2;
-				}
+			@include breakpoint($md) {
 				display: flex;
-				gap: 8px;
-
-				h1 {
-					font-weight: 700;
-					font-size: 18px;
-					line-height: 22px;
-					color: #c6c6c6;
-				}
-
-				h2 {
-					font-weight: 400;
-					font-size: 14px;
-					line-height: 17px;
-					color: #c6c6c6;
-				}
-			}
-
-			.seleccionado {
-				.numero {
-					background-color: #d30ed1;
-				}
-
-				h1 {
-					color: #d30ed1;
-				}
-
-				h2 {
-					color: #262626;
-				}
 			}
 		}
 	}

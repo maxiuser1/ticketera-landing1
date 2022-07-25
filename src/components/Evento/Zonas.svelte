@@ -14,12 +14,16 @@
 			...current,
 			zona: {
 				tipo: zonaSeleccionada.tipo,
-				base: zonaSeleccionada.base
+				base: zonaSeleccionada.base,
+				numerado: zonaSeleccionada.numerado
 			}
 		}));
 
-		if (zonaSeleccionada.numerada) goto(`../${evento.slug}/lugar`);
-		else goto(`../${evento.slug}/lugar`);
+		if (zonaSeleccionada.numerado) {
+			goto(`../${evento.slug}/lugar`);
+		} else {
+			goto(`../${evento.slug}/reserva`);
+		}
 	};
 </script>
 
@@ -28,8 +32,10 @@
 <section class="container entrada">
 	<div class="grid">
 		<div class="main">
-			<h2>Entradas</h2>
-			<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
+			<div class="titulos">
+				<h2>Entrada</h2>
+				<h3>Selecciona en que sector deseas adquirir y luego continua el proceso</h3>
+			</div>
 			<div
 				class="mapa"
 				use:zonas={evento.precios}
@@ -55,6 +61,15 @@
 </section>
 
 <style lang="scss">
+	.container {
+		padding-right: 0px;
+		padding-left: 0px;
+		@include breakpoint($md) {
+			padding-right: 24px;
+			padding-left: 24px;
+		}
+	}
+
 	.cta {
 		text-align: center;
 		margin-top: 52px;
@@ -71,8 +86,11 @@
 		margin-bottom: 50px;
 
 		.mapa {
-			margin: 20px 0px;
 			width: 100%;
+
+			@include breakpoint($md) {
+				margin: 20px 0px;
+			}
 			.zona {
 				border-radius: 4px;
 				margin: 0 auto;
@@ -85,10 +103,11 @@
 		}
 
 		.grid {
-			display: grid;
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			width: 100%;
-			gap: 2rem;
+			display: flex;
+			flex-direction: column;
+			@include breakpoint($md) {
+				flex-direction: row;
+			}
 
 			h2 {
 				font-weight: 700;
@@ -106,13 +125,26 @@
 			}
 
 			.main {
-				padding: 40px;
-				grid-column: span 2 / span 2;
+				padding: 0px;
+				flex-grow: 2;
+
 				background-color: white;
 				border-radius: 8px;
+
+				.titulos {
+					padding: 40px;
+					@include breakpoint($md) {
+						padding: 0px;
+					}
+				}
+
+				@include breakpoint($md) {
+					padding: 40px;
+				}
 			}
 
 			.summary {
+				flex-grow: 1;
 				padding: 40px;
 				background-color: white;
 				border-radius: 8px;
@@ -160,63 +192,5 @@
 			line-height: 24px;
 			color: #262626;
 		}
-	}
-
-	[data-tooltip] {
-		position: relative;
-		z-index: 2;
-		display: block;
-	}
-
-	[data-tooltip]:before,
-	[data-tooltip]:after {
-		visibility: hidden;
-		opacity: 0;
-		pointer-events: none;
-		transition: 0.2s ease-out;
-		transform: translate(-50%, 5px);
-	}
-
-	[data-tooltip]:before {
-		position: absolute;
-		bottom: 100%;
-		left: 50%;
-		margin-bottom: -15px;
-		padding: 7px;
-		width: 100%;
-		min-width: 70px;
-		max-width: 250px;
-		-webkit-border-radius: 20px;
-		-moz-border-radius: 20px;
-		border-radius: 20px;
-		background-color: #090909;
-
-		color: #fff;
-		content: attr(data-tooltip);
-		text-align: center;
-		font-size: 14px;
-		line-height: 1.2;
-		transition: 0.2s ease-out;
-	}
-
-	[data-tooltip]:after {
-		position: absolute;
-		bottom: 100%;
-		margin-bottom: -25px;
-		left: 50%;
-		width: 0;
-		border-top: 10px solid #000;
-		border-right: 15px solid transparent;
-		border-left: 15px solid transparent;
-		content: '   ';
-		font-size: 0;
-		line-height: 0;
-	}
-
-	[data-tooltip]:hover:before,
-	[data-tooltip]:hover:after {
-		visibility: visible;
-		opacity: 1;
-		transform: translate(-50%, 0);
 	}
 </style>
