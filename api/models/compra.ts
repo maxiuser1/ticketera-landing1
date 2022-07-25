@@ -9,8 +9,8 @@ export type Compra = {
 		artista?: string;
 	};
 	zona: {
-		tipo?: string;
-		base?: number;
+		tipo: string;
+		base: number;
 		numerado?: boolean;
 	};
 	entradas: Array<Sentado>;

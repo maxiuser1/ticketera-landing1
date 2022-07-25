@@ -8,7 +8,7 @@
       "methods": [
         "patch"
       ],
-      "route":"autorizar/{id}"
+      "route":"ventaManual/{eid}"
     },
     {
       "type": "http",
@@ -18,11 +18,11 @@
     {
       "type": "cosmosDB",
       "direction": "in",
-      "name": "turno",
+      "name": "evento",
       "databaseName": "quehaydb",
-      "collectionName": "turnos",
+      "collectionName": "eventos",
       "connectionStringSetting": "CosmosDBConnection",
-      "Id":"{id}",
+      "id":"{eid}",
       "PartitionKey":"quehay"
     },
     {
@@ -34,5 +34,5 @@
       "connectionStringSetting": "CosmosDBConnection"
     }
   ],
-  "scriptFile": "../dist/authorizeTrx/index.js"
+  "scriptFile": "../dist/postVentaManual/index.js"
 }

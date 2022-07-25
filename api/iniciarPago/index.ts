@@ -26,8 +26,6 @@ const httpTrigger: AzureFunction = async function (
 		}
 	}
 
-	context.log('--precio', precioReal);
-
 	// const precioDb = evento.precios.find(t => t.tipo == intencion.zona.tipo);
 
 	const { data: token } = await axios.get(`${niubizapi}/api.security/v1/security`, {

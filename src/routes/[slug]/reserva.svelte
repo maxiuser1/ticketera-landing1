@@ -28,6 +28,7 @@
 	import { AuthCredential } from 'firebase/auth';
 	import { filter, toPlainObject } from 'lodash';
 	import { current_component } from 'svelte/internal';
+	import { goto } from '$app/navigation';
 
 	export let evento: Evento;
 	let totalEntradas: number = 0;
@@ -79,6 +80,23 @@
 		calcular();
 	};
 
+	const ventaManualClick = async () => {
+		compraData.update((current) => ({
+			...current,
+			entradas: current.entradas
+				? [...current.entradas].concat(otrasEntradas.filter((t) => t.cantidad > 0))
+				: otrasEntradas.filter((t) => t.cantidad > 0)
+		}));
+
+		const pagores = await fetch(apii + '/api/ventaManual/' + evento.id, {
+			method: 'PATCH',
+			body: JSON.stringify({
+				payload: { ...$compraData }
+			})
+		});
+
+		goto(`../${evento.slug}/confirmacion`);
+	};
 	const continuarClick = async () => {
 		compraData.update((current) => ({
 			...current,
@@ -195,6 +213,7 @@
 			{/if}
 			<div class="cta">
 				<button on:click={continuarClick} class="btn">Continuar <Tarjeta /> </button>
+				<button on:click={ventaManualClick} class="btn">Venta manual </button>
 			</div>
 		</div>
 		<div class="detalle">

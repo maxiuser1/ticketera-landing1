@@ -1,5 +1,8 @@
+import { PatchOperation } from '@azure/cosmos';
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
 import axios from 'axios';
+import { Compra, Evento } from '../models';
+import { database } from '../services/helpers/db';
 
 const httpTrigger: AzureFunction = async function (
 	context: Context,
@@ -11,7 +14,6 @@ const httpTrigger: AzureFunction = async function (
 	const niubizapi = process.env['niubiz_api'];
 
 	const transaction = req.body;
-	context.log(transaction);
 
 	const { data: token } = await axios.get(`${niubizapi}/api.security/v1/security`, {
 		headers: { Authorization: credentials }
@@ -39,7 +41,52 @@ const httpTrigger: AzureFunction = async function (
 			}
 		);
 		const exito = resultado.data;
-		context.log(exito);
+		const compra = turno.info as Compra;
+
+		const container = await database().container('eventos');
+		const querySpec = `SELECT * from c where c.id = '${compra.evento.id}'`;
+
+		const { resources: items } = await container.items
+			.query(querySpec, { partitionKey: 'quehay' })
+			.fetchAll();
+
+		context.log('--evento', items);
+
+		const evento = items[0] as Evento;
+
+		const replaceOperation: PatchOperation[] = [];
+		compra.entradas.forEach((entrada) => {
+			const indexPrecio = evento.precios.findIndex((t) => t.tipo == entrada.tipo);
+
+			const ubicacion = evento.precios.find((t) => t.tipo == entrada.tipo);
+			const indexFila = ubicacion.ubicaciones.findIndex((t) => t.id == entrada.fila);
+
+			const fila = ubicacion.ubicaciones.find((t) => t.id == entrada.fila);
+			const indexAsiento = fila.asientos.findIndex((t) => t.id == entrada.asiento);
+
+			if (entrada.numerado) {
+				replaceOperation.push({
+					op: 'replace',
+					path: `/precios/${indexPrecio}/ubicaciones/${indexFila}/asientos/${indexAsiento}/s`,
+					value: 2
+				});
+			}
+		});
+
+		if (replaceOperation.length > 0)
+			await container.item(compra.evento.id, 'quehay').patch(replaceOperation);
+
+		context.bindings.entrada = {
+			tenant: 'quehay',
+			evento: compra.evento.id,
+			slug: compra.evento.slug,
+			entradas: compra.entradas,
+			pago: exito,
+			monto: turno.monto,
+			numero: turno.compra,
+			turno: turno.id
+		};
+
 		context.res = {
 			body: {
 				ok: true,
@@ -50,6 +97,7 @@ const httpTrigger: AzureFunction = async function (
 			}
 		};
 	} catch (err) {
+		context.log(err);
 		const fracaso = err.response.data;
 		context.log(fracaso);
 		context.res = {
