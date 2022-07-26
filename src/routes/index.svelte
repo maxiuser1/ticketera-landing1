@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-	<title>Que Hay!</title>
+	<title>Que Hay</title>
 </svelte:head>
 
 <Carousel {banners} />
