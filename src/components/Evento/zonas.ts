@@ -2,9 +2,14 @@ import { Tooltip } from '@components/Shared/ui/Tooltip';
 import type { SvelteComponent } from 'svelte';
 
 export const zonas = (node: any, props: any) => {
-	const mapa = node.querySelectorAll('path').forEach((each: any) => {
+	const mapa = node.querySelectorAll('g').forEach((each: any) => {
+		const pseudoId = each.id.split('-')[0];
 		props.forEach((cadaPrecio: any) => {
-			if (cadaPrecio.tipo.toLowerCase() == each.id.toLowerCase()) {
+
+			if (cadaPrecio.tipo.toLowerCase() == pseudoId.toLowerCase()) {
+
+				console.log('each',each);
+
 				let tooltipComp: SvelteComponent;
 				const prevcolor = each.getAttribute('fill');
 
@@ -27,7 +32,7 @@ export const zonas = (node: any, props: any) => {
 							mouseX: event.pageX,
 							mouseY: event.pageY,
 							config: {
-								body: `${cadaPrecio.tipo}: S/ ${cadaPrecio.base}`,
+								body: `${cadaPrecio.nombre}: S/ ${cadaPrecio.base}`,
 								bodyAsHTML: false,
 								place: 'top',
 								effect: 'solid',
