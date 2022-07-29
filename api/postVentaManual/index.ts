@@ -20,22 +20,25 @@ const httpTrigger: AzureFunction = async function (
 		}
 	}
 
-	const container = await database().container('eventos');
+	const container = await database().container('ensallos');
 
 	const replaceOperation: PatchOperation[] = [];
 	compra.entradas.forEach((entrada) => {
 		const indexPrecio = evento.precios.findIndex((t) => t.tipo == entrada.tipo);
 
-		const ubicacion = evento.precios.find((t) => t.tipo == entrada.tipo);
-		const indexFila = ubicacion.ubicaciones.findIndex((t) => t.id == entrada.fila);
-
-		const fila = ubicacion.ubicaciones.find((t) => t.id == entrada.fila);
-		const indexAsiento = fila.asientos.findIndex((t) => t.id == entrada.asiento);
+		context.log('ev', evento.precios);
+		context.log('entrada', entrada);
 
 		if (entrada.numerado) {
+			const currentPrecio = evento.precios.find((t) => t.tipo == entrada.tipo);
+			const indexFila = currentPrecio.filas.findIndex((t) => t.id == entrada.fila);
+
+			const fila = currentPrecio.filas.find((t) => t.id == entrada.fila);
+			const indexAsiento = fila.sits.findIndex((t) => t.id == entrada.asiento);
+
 			replaceOperation.push({
 				op: 'replace',
-				path: `/precios/${indexPrecio}/ubicaciones/${indexFila}/asientos/${indexAsiento}/s`,
+				path: `/precios/${indexPrecio}/filas/${indexFila}/sits/${indexAsiento}/s`,
 				value: 2
 			});
 		}

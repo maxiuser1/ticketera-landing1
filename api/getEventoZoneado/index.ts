@@ -5,16 +5,15 @@ const httpTrigger: AzureFunction = async function (
 	req: HttpRequest,
 	item: any
 ): Promise<void> {
-
-	context.log('event',item);
-	const container = await database().container('locaciones');
-	const querySpec = `SELECT * from c where c.id = '${item[0].locacion}'`;
+	context.log('event', item);
+	const container = await database().container('seccionamientos');
+	const querySpec = `SELECT * from c where c.id = '${item[0].ubicacion.seccionamiento}'`;
 
 	const { resources: items } = await container.items
 		.query(querySpec, { partitionKey: item[0].lugar })
 		.fetchAll();
 
-		context.log('items',items);
+	context.log('items', items);
 	const resultado = { ...item[0], locacion: items[0].general.mapa };
 
 	context.res = {

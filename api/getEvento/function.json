@@ -20,9 +20,9 @@
       "direction": "in",
       "name": "items",
       "databaseName": "quehaydb",
-      "collectionName": "eventos",
+      "collectionName": "ensallos",
       "connectionStringSetting": "CosmosDBConnection",
-      "sqlQuery": "SELECT * from c where c.slug = {slug}"
+      "sqlQuery": "SELECT * from c where c.general.slug = {slug}"
     }
   ],
   "scriptFile": "../dist/getEvento/index.js"

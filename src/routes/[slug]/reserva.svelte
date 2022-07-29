@@ -95,7 +95,7 @@
 			})
 		});
 
-		goto(`../${evento.slug}/confirmacion`);
+		goto(`../${evento.general?.slug}/confirmacion`);
 	};
 	const continuarClick = async () => {
 		compraData.update((current) => ({
@@ -140,7 +140,7 @@
 </svelte:head>
 
 <Breadcrumbs {evento} />
-<Steps paso="entrada" />
+<Steps paso={4} />
 
 <section class="container">
 	<div class="grid">
@@ -218,8 +218,8 @@
 		</div>
 		<div class="detalle">
 			<h1>Detalle</h1>
-			<h3>{evento.artista}</h3>
-			<h4>{evento.nombre}</h4>
+			<h3>{evento.general?.artista}</h3>
+			<h4>{evento.general?.nombre}</h4>
 		</div>
 	</div>
 </section>

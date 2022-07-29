@@ -22,5 +22,5 @@
 </script>
 
 <Breadcrumbs {evento} />
-<Steps paso="entrada" />
+<Steps paso={1} />
 <Zonas {evento} />

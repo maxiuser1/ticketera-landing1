@@ -8,10 +8,10 @@ export type Compra = {
 		slug?: string;
 		artista?: string;
 	};
-	zona: {
+	zona?: {
 		tipo: string;
 		base: number;
 		numerado?: boolean;
 	};
-	entradas: Array<Sentado>;
+	entradas?: Array<Sentado>;
 };

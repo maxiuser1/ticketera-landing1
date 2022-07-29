@@ -4,7 +4,7 @@
 
 	import type { Evento } from '@models/index';
 
-	export let event: Evento;
+	export let evento: Evento;
 	let colors = [
 		'#FFEBFF',
 		'#FFD6FE',
@@ -30,15 +30,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#if event.precios}
-						{#each event.precios as precio, idx}
+					{#if evento.precios}
+						{#each evento.precios as precio, idx}
 							<tr class:white={idx % 2 == 0}>
 								<td class="radio">
 									<div class="radio">
-										<Radio color={idx > colors.length ? colors[colors.length] : colors[idx]} />
+										<Radio color={precio.color ? precio.color : ''} />
 									</div>
 								</td>
-								<td>{precio.tipo}</td>
+								<td>{precio.nombre}</td>
 								<td><Soles number={precio.base} /></td>
 							</tr>
 						{/each}

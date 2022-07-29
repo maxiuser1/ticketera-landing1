@@ -5,7 +5,6 @@ export type Evento = {
 	nombre?: string;
 	artista?: string;
 	banner?: string;
-	fechas?: string[];
 	lugar?: string;
 	precios?: Price[];
 	slug: string;
@@ -14,4 +13,20 @@ export type Evento = {
 	categoria?: string;
 	mapa?: string;
 	locacion?: string;
+	caratula?: {
+		banner: string;
+		card: string;
+		banneado: boolean;
+	};
+	general?: {
+		categoria: string;
+		nombre: string;
+		artista: string;
+		slug: string;
+		destacado: boolean;
+	};
+	fechas?: any;
+	ubicacion?: {
+		nombre?: string;
+	};
 };

@@ -1,14 +1,17 @@
 <script lang="ts">
+	import dayjs from '@utils/days/day';
 	import type { Evento } from '@models/index';
-	export let event: Evento;
+	export let evento: Evento;
 </script>
 
 <section class="container">
 	<div class="info ">
 		<div>
 			<h1>Fechas</h1>
-			<p>
-				{event.fechas?.join(',')}
+			<p class="fechas">
+				{#each evento.fechas as fecha}
+					{dayjs(fecha.dia).format('ddd D MMMM')}
+				{/each}
 			</p>
 			<p class="lastp">
 				<svg
@@ -23,21 +26,18 @@
 						fill="#777777"
 					/>
 				</svg>
-				<span class="luagar"> {event.lugar}</span>
+				<span class="luagar"> {evento.ubicacion?.nombre}</span>
 			</p>
-
-			<h1>Detalles</h1>
-			<p>Prueba</p>
 		</div>
 		<div class="map">
-			<h1>Ubicación</h1>
+			<!-- <h1>Ubicación</h1>
 			<iframe
 				title="test"
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3956287838505!2d-76.9846301084894!3d-12.085045418600219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7e5a9b512cf%3A0x7b2988869e2c48c2!2sArena%20Per%C3%BA!5e0!3m2!1sen!2spe!4v1655379769860!5m2!1sen!2spe"
 				style="border:0;"
 				loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"
-			/>
+			/> -->
 		</div>
 	</div>
 </section>
@@ -77,7 +77,13 @@
 			margin-bottom: 16px;
 		}
 
+		p.fechas {
+			font-weight: 500;
+			font-size: 16px;
+			line-height: 16px;
+		}
 		p.lastp {
+			margin-top: 8px;
 			margin-bottom: 60px;
 		}
 

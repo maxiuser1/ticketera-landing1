@@ -4,8 +4,8 @@ export type Asiento = {
 };
 
 export type Sentado = {
-	base: number;
-	tipo: string;
+	base?: number;
+	tipo?: string;
 	fila: number;
 	asiento: number;
 	cantidad: number;

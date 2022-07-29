@@ -43,7 +43,7 @@ const httpTrigger: AzureFunction = async function (
 		const exito = resultado.data;
 		const compra = turno.info as Compra;
 
-		const container = await database().container('eventos');
+		const container = await database().container('ensallos');
 		const querySpec = `SELECT * from c where c.id = '${compra.evento.id}'`;
 
 		const { resources: items } = await container.items
@@ -58,16 +58,15 @@ const httpTrigger: AzureFunction = async function (
 		compra.entradas.forEach((entrada) => {
 			const indexPrecio = evento.precios.findIndex((t) => t.tipo == entrada.tipo);
 
-			const ubicacion = evento.precios.find((t) => t.tipo == entrada.tipo);
-			const indexFila = ubicacion.ubicaciones.findIndex((t) => t.id == entrada.fila);
-
-			const fila = ubicacion.ubicaciones.find((t) => t.id == entrada.fila);
-			const indexAsiento = fila.asientos.findIndex((t) => t.id == entrada.asiento);
-
 			if (entrada.numerado) {
+				const ubicacion = evento.precios.find((t) => t.tipo == entrada.tipo);
+				const indexFila = ubicacion.filas.findIndex((t) => t.id == entrada.fila);
+
+				const fila = ubicacion.filas.find((t) => t.id == entrada.fila);
+				const indexAsiento = fila.sits.findIndex((t) => t.id == entrada.asiento);
 				replaceOperation.push({
 					op: 'replace',
-					path: `/precios/${indexPrecio}/ubicaciones/${indexFila}/asientos/${indexAsiento}/s`,
+					path: `/precios/${indexPrecio}/filas/${indexFila}/asientos/${indexAsiento}/s`,
 					value: 2
 				});
 			}

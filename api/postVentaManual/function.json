@@ -20,7 +20,7 @@
       "direction": "in",
       "name": "evento",
       "databaseName": "quehaydb",
-      "collectionName": "eventos",
+      "collectionName": "ensallos",
       "connectionStringSetting": "CosmosDBConnection",
       "id":"{eid}",
       "PartitionKey":"quehay"

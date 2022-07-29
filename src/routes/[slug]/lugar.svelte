@@ -6,6 +6,7 @@
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const resp = await fetch(apii + '/api/eventos/' + params.slug);
 		const evento = await resp.json();
+		console.log('evento precio', evento);
 		return {
 			props: {
 				evento: evento
@@ -24,16 +25,15 @@
 
 	export let evento: Evento;
 	let filas: Array<Fila> =
-		evento.precios?.find((t) => t.tipo == $compraData.zona?.tipo)?.ubicaciones ?? new Array<Fila>();
+		evento.precios?.find((t) => t.tipo == $compraData.zona?.tipo)?.filas ?? new Array<Fila>();
 	const sitWidth = 25;
-	// const filaWidth = (sitWidth + 4) * filas[0].asientos.length;
 	const filaWidth = 100;
 
 	const continuarClick = () => {
 		let asientos: Array<Sentado> = new Array<Sentado>();
 
 		filas.forEach((fila) => {
-			fila.asientos.forEach((a) => {
+			fila.sits.forEach((a) => {
 				if (a.s == 1) {
 					asientos.push({
 						tipo: $compraData.zona?.tipo,
@@ -52,12 +52,12 @@
 			entradas: asientos
 		}));
 
-		goto(`../${evento.slug}/reserva`);
+		goto(`../${evento.general?.slug}/reserva`);
 	};
 </script>
 
 <Breadcrumbs {evento} />
-<Steps paso="lugar" />
+<Steps paso={2} />
 
 <section class="container entrada">
 	<div class="grid">
@@ -68,7 +68,7 @@
 				<div class="asientos" style:width="{filaWidth} px">
 					{#each filas as fila}
 						<ul class="fila">
-							{#each fila.asientos as asiento}
+							{#each fila.sits as asiento}
 								<li style:min-width="{sitWidth}px">
 									{#if asiento.s != 0}
 										<Box
@@ -91,7 +91,7 @@
 			<div class="cta">
 				<button on:click={continuarClick} class="btn"
 					>Continuar ({filas.reduce(
-						(count, current) => count + current.asientos.filter((t) => t.s == 1).length,
+						(count, current) => count + current.sits.filter((t) => t.s == 1).length,
 						0
 					)}) <Arrow />
 				</button>
@@ -100,12 +100,12 @@
 		<div class="summary">
 			<div class="headings">
 				<h2>Detalle</h2>
-				<h1>{evento.artista}</h1>
-				<h3>{evento.nombre}</h3>
+				<h1>{evento.general?.artista}</h1>
+				<h3>{evento.general?.nombre}</h3>
 			</div>
 
-			<h4>{evento.fechas?.map((t) => t)}</h4>
-			<h5>{evento.lugar}</h5>
+			<!-- <h4>{evento.fechas?.map((t) => t)}</h4> -->
+			<h5>{evento.ubicacion?.nombre}</h5>
 		</div>
 	</div>
 </section>

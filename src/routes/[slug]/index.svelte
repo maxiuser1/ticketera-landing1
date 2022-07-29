@@ -7,11 +7,10 @@
 	export const load: Load<Params> = async ({ params, fetch }) => {
 		const resp = await fetch(apii + '/api/eventos/' + params.slug);
 		const data = await resp.json();
-		const slug = params.slug;
 
 		return {
 			props: {
-				event: data
+				evento: data
 			}
 		};
 	};
@@ -21,41 +20,47 @@
 	import type { Evento, Compra } from '@models/index';
 	import { goto } from '$app/navigation';
 	import { compraData } from '@components/Evento/store';
+	import { loading } from '@components/Shared/loading/loading';
+	import Loading from '@components/Shared/loading/Loading.svelte';
+	import { navigating } from '$app/stores';
 
-	export let event: Evento;
+	export let evento: Evento;
+	$: loading.setNavigate(!!$navigating);
 
 	const comprarClick = () => {
 		const compra: Compra = {
 			evento: {
-				id: event.id,
-				slug: event.slug,
-				artista: event.artista
+				id: evento.id,
+				slug: evento.general?.slug,
+				artista: evento.general?.artista
 			}
 		};
 		compraData.set(compra);
-		goto(`${event.slug}/entradas`);
+		goto(`${evento.general?.slug}/entradas`);
 	};
 </script>
 
 <svelte:head>
-	<title>{event.slug}</title>
+	<title>{evento.general?.slug}</title>
 </svelte:head>
 
-<section class="banner" style:background-image="url('{event.banner}')">
+<section class="banner" style:background-image="url('{evento.caratula?.banner}')">
 	<div class="content-banner">
 		<div class="titulos">
-			<h2>{event.artista}</h2>
+			<h2>{evento.general?.artista}</h2>
 		</div>
 	</div>
 </section>
 
-<Info {event} />
-<Entradas {event} />
+<Loading />
+
+<Info {evento} />
+<Entradas {evento} />
 <section class="container cta">
 	<button on:click={comprarClick} class="comprar">Ir a comprar </button>
 </section>
-<Artistas />
 
+<!-- <Artistas /> -->
 <style lang="scss">
 	.cta {
 		margin-top: 52px;

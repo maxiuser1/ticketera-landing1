@@ -6,6 +6,9 @@
 	import { loading } from '@components/Shared/loading/loading';
 	import Loading from '@components/Shared/loading/Loading.svelte';
 	import { navigating } from '$app/stores';
+	import dayjs from '@utils/days/day';
+	import { Radio } from '@utils/icons';
+	import { Soles } from '@utils/formats';
 	$: loading.setNavigate(!!$navigating);
 	export let evento: Evento;
 
@@ -20,9 +23,9 @@
 		}));
 
 		if (zonaSeleccionada.numerado) {
-			goto(`../${evento.slug}/lugar`);
+			goto(`../${evento.general?.slug}/lugar`);
 		} else {
-			goto(`../${evento.slug}/reserva`);
+			goto(`../${evento.general?.slug}/reserva`);
 		}
 	};
 </script>
@@ -46,21 +49,45 @@
 			>
 				{@html evento.locacion}
 			</div>
+			<div class="leyenda">
+				<div>
+					{#if evento.precios}
+						<ul>
+							{#each evento.precios as precio, idx}
+								<li>
+									<Radio color={precio.color ? precio.color : ''} />
+									{precio.nombre}
+									<Soles number={precio.base} />
+								</li>
+							{/each}
+						</ul>
+					{/if}
+				</div>
+			</div>
 		</div>
 		<div class="summary">
 			<div class="headings">
 				<h2>Detalle</h2>
-				<h1>{evento.artista}</h1>
-				<h3>{evento.nombre}</h3>
+				<h1>{evento.general?.artista}</h1>
+				<h3>{evento.general?.nombre}</h3>
 			</div>
 
-			<h4>{evento.fechas?.map((t) => t)}</h4>
-			<h5>{evento.lugar}</h5>
+			<h4>
+				{#each evento.fechas as fecha}
+					{dayjs(fecha.dia).format('ddd D MMMM')}
+				{/each}
+			</h4>
+			<h5>{evento.ubicacion?.nombre}</h5>
 		</div>
 	</div>
 </section>
 
 <style lang="scss">
+	.leyenda {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.container {
 		padding-right: 0px;
 		padding-left: 0px;

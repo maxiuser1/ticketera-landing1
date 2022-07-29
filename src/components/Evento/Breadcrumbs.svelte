@@ -8,7 +8,7 @@
 	<div class="container">
 		<ul>
 			<li>
-				<a href="/{evento.slug}">
+				<a href="/{evento.general?.slug}">
 					<svg
 						width="16"
 						height="16"
@@ -21,8 +21,8 @@
 				</a>
 			</li>
 			<li class="selected">
-				<a href="/{evento.slug}">
-					{evento.artista}
+				<a href="/{evento.general?.slug}">
+					{evento.general?.artista}
 				</a>
 			</li>
 			<li>></li>
